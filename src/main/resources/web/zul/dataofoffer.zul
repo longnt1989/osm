@@ -1,0 +1,45 @@
+<panel >
+	<caption label="Data of the Offer" style="padding:0px;color: white;" />
+	<panelchildren style="padding:0px">
+		<grid>
+			<columns sizable="true" >
+				<column label="Nr" width="80px;" />
+				<column label="Data name" width="100px" />
+				<column label="Data format" width="100px" />
+				<column label="Amount" width="100px"/>
+				<column label="Delivery time" width="150px" />
+				<column label="Note" />
+				<column label="Submission" width="100px" />
+				<column label="Time" width="50px" />
+				<column label="Responsible" width="100px" />
+				<column label="" width="80px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="001" />
+					<label value="1" />
+					<label value="PDF" />
+					<label value="10" />
+					<label value="Everyweek" />
+					<label value="" />
+					<label value="" />
+					<label value="" />
+					<label value="" />
+					<image src="/img/iconConfirm.jpg" style="height: 20px; margin-top:5px" />
+				</row>
+				<row>
+					<label value="002" />
+					<label value="2" />
+					<label value="PDF" />
+					<label value="10" />
+					<label value="Everyweek" />
+					<label value="" />
+					<label value="" />
+					<label value="" />
+					<label value="" />
+					<image src="/img/iconConfirm.jpg" style="height: 20px; margin-top:5px" />
+				</row>
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>

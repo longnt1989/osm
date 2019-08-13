@@ -47,6 +47,7 @@ public class GeneralController extends SelectorComposer<Component> {
 	@Autowired
 	private RequestService requestService;
 	private List<Request> requests;
+	private HomeController homeController;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -68,18 +69,27 @@ public class GeneralController extends SelectorComposer<Component> {
 		String code = rq.getRequestNumber();
 		Row row = new Row();
 		row.setParent(rowsGeneral);
-		
+
 		Label txtNr = new Label(String.valueOf(index));
 		txtNr.setStyle("width:100%");
 		txtNr.setParent(row);
-		Label txtNumber = new Label(code);
+
+		A txtNumber = new A(code);
 		txtNumber.setStyle("width:100%");
 		txtNumber.setParent(row);
+		txtNumber.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				homeController.showRequestDetail();
+
+			}
+		});
 		A order1 = new A("001-001");
 		order1.setParent(row);
-		
+
 		Textbox txtName = new Textbox(rq.getName());
 		txtName.setWidth("100%");
+		txtName.setHeight("25px");
 		txtName.setParent(row);
 		txtName.setInplace(true);
 		txtName.addEventListener(Events.ON_BLUR, new EventListener<Event>() {
@@ -89,24 +99,27 @@ public class GeneralController extends SelectorComposer<Component> {
 				requestService.saveRequest(rq);
 			}
 		});
-		
+
 		Textbox txtProgram = new Textbox("");
 		txtProgram.setWidth("100%");
+		txtProgram.setHeight("25px");
 		txtProgram.setParent(row);
 		txtProgram.setInplace(true);
 		Textbox txtOwrer = new Textbox("");
 		txtOwrer.setWidth("100%");
+		txtOwrer.setHeight("25px");
 		txtOwrer.setParent(row);
 		txtOwrer.setInplace(true);
-		
+
 		A aDetail = new A("");
 		Image imgDetail = new Image("/img/iconForder.jfif");
 		imgDetail.setParent(aDetail);
-		imgDetail.setStyle("height: 25px;margin: 5px;");
+		imgDetail.setStyle("height: 20px;");
 		aDetail.setParent(row);
 
 		Datebox deadline = new Datebox();
 		deadline.setWidth("100%");
+		deadline.setHeight("25px");
 		deadline.setParent(row);
 		deadline.setFormat("dd/MM/yyyy");
 		deadline.setInplace(true);
@@ -114,10 +127,10 @@ public class GeneralController extends SelectorComposer<Component> {
 		A aOdder = new A("");
 		Image imgOdder = new Image("/img/iconLoad.jfif");
 		imgOdder.setParent(aOdder);
-		imgOdder.setStyle("height: 25px; margin:5px");
+		imgOdder.setStyle("height: 20px;");
 		aOdder.setParent(row);
-		
-		Button btn = new Button("Delete");
+
+		A btn = new A("Delete");
 		btn.setParent(row);
 		btn.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			@Override
@@ -135,7 +148,11 @@ public class GeneralController extends SelectorComposer<Component> {
 		rq.setCreateDate(new Date());
 		rq.setStatus("In Progress");
 		rq = requestService.saveRequest(rq);
-		createRow(rq,requests.size()+1);
+		createRow(rq, requests.size() + 1);
+	}
+
+	public void setHome(HomeController homeController) {
+		this.homeController = homeController;
 	}
 
 }

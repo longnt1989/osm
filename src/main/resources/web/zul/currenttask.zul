@@ -1,0 +1,33 @@
+<panel style="background:#e37b19 !important">
+	<caption label="Current task" style="padding:0px;color: white; background:#e37b19 !important" />
+	<panelchildren style="padding:0px">
+		<grid>
+			<columns sizable="true" >
+				<column label="Number" width="80px;" style="background:#e37b19 !important"/>
+				<column label="Type" width="80px" style="background:#e37b19 !important"/>
+				<column label="Name" width="150px" style="background:#e37b19 !important"/>
+				<column label="Action needed" style="background:#e37b19 !important"/>
+				<column label="Deadline" width="100px" style="background:#e37b19 !important"/>
+				<column label="Status" width="80px" style="background:#e37b19 !important"/>
+			</columns>
+			<rows>
+				<row>
+					<label value="001" />
+					<label value="Request" />
+					<label value="Holland" />
+					<label value="You are working on request" />
+					<label value="20/09/2019" />
+					<label value="" />
+				</row>
+				<row>
+					<label value="001-002" />
+					<label value="Order" />
+					<label value="Holland" />
+					<label value="You are working on request" />
+					<label value="20/09/2019" />
+					<label value="" />
+				</row>
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>
