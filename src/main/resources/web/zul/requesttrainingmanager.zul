@@ -1,0 +1,75 @@
+<zk xmlns:n="native">
+    <?link rel="stylesheet" href="/css/home.css"?>
+    <panel id="requestTrainingManagerDiv" border="1px solid" collapsible="true" style="width: 1630px" open="false"
+           apply="com.pt.osm.controller.RequestTrainingManagerController">
+        <caption label="Request Training Manager" style="padding:0px;color: #0064ed;"/>
+        <panelchildren style="padding:0px">
+            <grid>
+                <columns sizable="true">
+                    <column label="" width="400px"/>
+                    <column label="" width="300px"/>
+                    <column label="" width="200px"/>
+                    <column label="" width="150px"/>
+                    <column label="" width="150px"/>
+                    <column label="" width="400px"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Movable"/>
+                        <label value="Filter"/>
+                        <label value="Related Order Nr."/>
+                        <label value="Programm"/>
+                        <label value="Status"/>
+                        <label value="Training Material"/>
+                    </row>
+                    <row>
+                        <label value="(available for everyone)"/>
+                        <label value=""/>
+                        <label value=""/>
+                        <label value=""/>
+                        <label value=""/>
+                        <label value="( For training purpose)"/>
+                    </row>
+                    <row>
+                        <label value="001"/>
+                        <label value=""/>
+                        <grid>
+                            <rows>
+                                <row>
+                                    <label value="001-001"/>
+                                </row>
+                                <row>
+                                    <label value="001-002"/>
+                                </row>
+                                <row>
+                                    <label value="001-003"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <label value="Revit"/>
+                        <grid>
+                            <rows>
+                                <row>
+                                    <label value="In Development"/>
+                                </row>
+                                <row>
+                                    <label value="In Production"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <label value=""/>
+                    </row>
+                    <row>
+                        <label value="002"/>
+                        <label value=""/>
+                        <label value=""/>
+                        <label value="Allplan"/>
+                        <label value=""/>
+                        <label value=""/>
+                    </row>
+
+                </rows>
+            </grid>
+        </panelchildren>
+    </panel>
+</zk>

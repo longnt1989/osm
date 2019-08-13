@@ -1,0 +1,123 @@
+<zk xmlns:n="native">
+	<panel  id = "developmentOfferDiv" collapsible="true" width="3000px" apply="com.pt.osm.controller.DevelopmentOfferController">
+		<caption label="Offer" style="padding:0px;color: #0064ed;" />
+		<panelchildren style="padding:0px">
+			<panel collapsible="true" width="1000px">
+				<caption label="General infomation" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<grid style="overflow: hidden;">
+						<columns sizable="true">
+							<column label="" width="300px" />
+							<column label="" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Offer number" />
+								<label id="lbOfNumber" value="" />
+							</row>
+							<row>
+								<label value="Related to the request-number" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Client" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Contractor" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Creation by" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Creation Date" />
+								<label  id="lbOfCreateDate" value="" />
+							</row>
+							<row>
+								<cell colspan="2">
+									<label value="Date and signature and full name" />
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" width="1000px">
+				<caption label="Description of the offer" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<textbox id="txtOfDescription" style="float: left;border: 1px solid #4fb7ff;padding: 10px; color: #5252f3; width:100%;" rows="6"/>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" width="100%">
+				<caption label="Scope of supply (delivered files)" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<grid>
+						<columns sizable="true">
+							<column label="Nr." width="200px" />
+							<column label="Interaction" />
+							<column label="Deadline" />
+							<column label="Data name" />
+							<column label="Data Format" />
+							<column label="Number of units" />
+							<column label="Expected delivery time" />
+							<column label="Note" />
+							<column label="Submission date" />
+							<column label="Submission Data" />
+							<column label="Processing time" />
+							<column label="Confirmation from the german side" />
+						</columns>
+						<rows id="rowsOfferData">
+							<row>
+								<a id="aAddOfferData">
+									<image src="/img/iconAdd.png" style="width: 50px;" />
+								</a>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" width="100%">
+				<caption label="Payment" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<grid>
+						<columns sizable="true">
+							<column label="Nr." width="200px" />
+							<column label="Interaction" />
+							<column label="Name of the Order" />
+							<column label="Attachment" />
+							<column label="Unit price" />
+							<column label="Note" />
+							<column label="Confirmation from the german side" />
+						</columns>
+						<rows id="rowsOfferPayment">
+							<row>
+								<a id="aAddOfferPayment">
+									<image src="/img/iconAdd.png" style="width: 50px;" />
+								</a>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+		</panelchildren>
+	</panel>
+</zk>

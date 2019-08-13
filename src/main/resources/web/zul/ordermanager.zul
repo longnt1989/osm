@@ -1,0 +1,41 @@
+<zk xmlns:n="native">
+    <?link rel="stylesheet" href="/css/home.css"?>
+    <panel id="orderManagerDiv" border="1px solid" collapsible="true" style="width: 1250px" open="false"
+           apply="com.pt.osm.controller.OrderManagerController">
+        <caption label="Order Manager" style="padding:0px;color: #0064ed;"/>
+        <panelchildren style="padding:0px">
+            <grid>
+                <columns sizable="true">
+                    <column label="Order Number" width="200px"/>
+                    <column label="Status" width="400px"/>
+                    <column label="Owner" width="200px"/>
+                    <column label="Deadline" width="200px"/>
+                    <column label="Related Request Nr" width="200px"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="001-002"/>
+                        <label value="Pending free to take"/>
+                        <label value="thangpm"/>
+                        <label value="2020-02-22"/>
+                        <label value="001"/>
+                    </row>
+                    <row>
+                        <label value="001-003"/>
+                        <label value="An engineer has been assigned for this order,waiting for the confirmation of the engineer"/>
+                        <label value="longnt2"/>
+                        <label value="2020-02-22"/>
+                        <label value="001"/>
+                    </row>
+                    <row>
+                        <label value="001-004"/>
+                        <label value="assigned"/>
+                        <label value="hieund1"/>
+                        <label value="2020-02-22"/>
+                        <label value="001"/>
+                    </row>
+                </rows>
+            </grid>
+        </panelchildren>
+    </panel>
+</zk>

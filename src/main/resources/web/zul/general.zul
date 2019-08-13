@@ -1,0 +1,22 @@
+<panel id="panelGeneral" apply="com.pt.osm.controller.GeneralController">
+	<caption label="General infomation" style="padding:0px;color: white" />
+	<panelchildren style="padding:0px">
+		<grid>
+			<columns sizable="true">
+				<column label="Nr." width="40px" />
+				<column label="Request number" />
+				<column label="Order Nr" width="90px" />
+				<column label="Name" />
+				<column label="Programm" width="100px" />
+				<column label="Owner" />
+				<column label="Training Material" width="130px" />
+				<column label="Deadline" />
+				<column label="Status" width="60px" />
+				<column label="Action" width="100px" />
+			</columns>
+			<rows id="rowsGeneral">
+
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>

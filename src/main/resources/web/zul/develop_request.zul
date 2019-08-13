@@ -1,0 +1,117 @@
+<zk xmlns:n="native">
+	<panel id = "developmentReqDiv" collapsible="true" width="3000px" apply="com.pt.osm.controller.DevelopmentReqController">
+		<caption label="Request" style="padding:0px;color: #0064ed;" />
+		<panelchildren style="padding:0px">
+			<panel collapsible="true" width="1000px">
+				<caption label="General infomation" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<grid style="overflow: hidden;">
+						<columns sizable="true">
+							<column label="" width="200px" />
+							<column label="" />
+						</columns>
+						<rows>
+							<row>
+								<label value="Request number" />
+								<label id="lbRqNumber" value="" />
+							</row>
+							<row>
+								<label value="Main client" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Sub client" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Contractor" />
+								<label value="" />
+							</row>
+							<row>
+								<label value="Create by" />
+								<label value="" />
+							</row>
+							<row>
+								<label  value="Creation Date" />
+								<label id="lbCreateDate" value="" />
+							</row>
+							<row>
+								<cell colspan="2">
+									<label value="Date and signature and full name" />
+								</cell>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" width="1000px">
+				<caption label="Description of the request" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<textbox id="txtReqDescription" style="float: left;border: 1px solid #4fb7ff;padding: 10px; color: #5252f3; width:100%;" rows="6"/>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" width="100%">
+				<caption label="Data of the request" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<grid>
+						<columns sizable="true">
+							<column label="Nr." width="100px" />
+							<column label="Interaction" width="320px" />
+							<column label="Data name" />
+							<column label="Data Format" width="100px"/>
+							<column label="Number of units" width="100px"/>
+							<column label="Expected delivery time" />
+							<column label="Note" />
+							<column label="Attachment" />
+							<column label="Confirmation from vietnamese side for receiving the data" />
+						</columns>
+						<rows id="rowsOrderDev">
+							<row>
+								<a id="aAddOrder">
+									<image src="/img/iconAdd.png" style="width: 50px;" />
+								</a>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<panel collapsible="true" width="100%">
+				<caption label="Budget" style="padding:0px;color: #0064ed;" />
+				<panelchildren style="padding:0px">
+					<grid>
+						<columns sizable="true">
+							<column label="Nr." width="100px" />
+							<column label="Interaction" width="320px"/>
+							<column label="Name of the Request" />
+							<column label="Unit price" />
+							<column label="Note" />
+							<column label="Attachment" />
+							<column label="Confirmation from vietnamese side for receiving the price offer" />
+						</columns>
+						<rows id="rowsBudget">
+							<row>
+								<a id="aAddBudget">
+									<image src="/img/iconAdd.png" style="width: 50px;" />
+								</a>
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+								<label value="" />
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+		</panelchildren>
+	</panel>
+</zk>

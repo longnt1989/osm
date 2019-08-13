@@ -1,0 +1,102 @@
+<zk xmlns:n="native">
+    <?link rel="stylesheet" href="/css/home.css"?>
+    <panel id="ceoDiv" border="1px solid" collapsible="true" style="width: 1020px" open="false"
+           apply="com.pt.osm.controller.CEOController">
+        <caption label="CEO" style="padding:0px;color: #0064ed;"/>
+        <panelchildren style="padding:0px">
+            <grid>
+                <columns sizable="true">
+                    <column label="ID" width="100px"/>
+                    <column label="Team Leader" width="300px"/>
+                    <column label="Group Leader" width="200px"/>
+                    <column label="Engineer" width="200px"/>
+                    <column label="Action needed" width="200px"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value=""/>
+                        <grid>
+                            <rows>
+                                <row>
+                                    <label value="Team Leader ( Static Eurocode)"/>
+                                </row>
+                                <row>
+                                    <label value="Team Leader ( Allplan, Planbar, Teklla)"/>
+                                </row>
+                                <row>
+                                    <label value="Team Leader ( Revit, Autocad)"/>
+                                </row>
+                                <row>
+                                    <label value="Team Leader ( HR Manager"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <grid>
+                            <rows>
+                                <row>
+                                    <label value="Group Leader 1"/>
+                                </row>
+                                <row>
+                                    <label value="Group Leader 2"/>
+                                </row>
+                                <row>
+                                    <label value="Group Leader 3"/>
+                                </row>
+                                <row>
+                                    <label value="Group Leader 4"/>
+                                </row>
+                                <row>
+                                    <label value="Group Leader 5"/>
+                                </row>
+                                <row>
+                                    <label value="Group Leader 6"/>
+                                </row>
+                                <row>
+                                    <label value="Group Leader 7"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <grid>
+                            <rows>
+                                <row>
+                                    <label value="Enginneer 1"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 2"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 3"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 4"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 5"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 6"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 7"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 8"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 9"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 10"/>
+                                </row>
+                                <row>
+                                    <label value="Enginneer 11"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <label value=""/>
+                    </row>
+                </rows>
+            </grid>
+        </panelchildren>
+    </panel>
+</zk>

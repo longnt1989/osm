@@ -1,0 +1,30 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+	mavenLocal()
+	maven { url "https://mavensync.zkoss.org/maven2" }
+	maven { url "https://mavensync.zkoss.org/eval" }
+	mavenCentral()
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+ext {
+	zkspringbootVersion = '1.0.4'
+}
+
+dependencies {
+	compile "org.zkoss.zkspringboot:zkspringboot-starter:${zkspringbootVersion}"
+}

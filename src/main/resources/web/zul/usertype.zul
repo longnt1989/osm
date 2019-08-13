@@ -1,0 +1,40 @@
+<zk xmlns:n="native">
+    <?link rel="stylesheet" href="/css/home.css"?>
+    <panel id="userTypeDiv" border="1px solid" collapsible="true" style="width: 1250px" open="false"
+           apply="com.pt.osm.controller.UserTypeController">
+        <caption label="User Type" style="padding:0px;color: #0064ed;"/>
+        <panelchildren style="padding:0px">
+            <grid hflex="min" model="@init(vm.allBooks) @template('row')">
+                <columns height="22px">
+                    <column width="150px" label="" />
+                    <column width="150px" label="" />
+                    <column width="200px" label="" />
+                    <column width="150px" label="" />
+                </columns>
+                <rows id = "rowsGeneral">
+                    <row>
+                        <div>
+                            <vlayout>
+                                <a id = "btnAddRow">
+                                    <image  src="/img/iconCreateReq.png"
+                                            style="width: 40px;" />
+                                </a>
+                            </vlayout>
+
+                        </div>
+                        <label value="" />
+                        <label value="" />
+                        <label value="" />
+                    </row>
+                    <row>
+                        <label value="Code" />
+                        <label value="Name" />
+                        <label value="Description" />
+                        <label value="Action" />
+                    </row>
+
+                </rows>
+            </grid>
+        </panelchildren>
+    </panel>
+</zk>

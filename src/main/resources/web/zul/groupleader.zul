@@ -1,0 +1,80 @@
+<zk xmlns:n="native">
+    <?link rel="stylesheet" href="/css/home.css"?>
+    <panel id="groupLeaderDiv" border="1px solid" collapsible="true" style="width: 1600px" open="false"
+           apply="com.pt.osm.controller.GroupLeaderController">
+        <caption label="Group Leader" style="padding:0px;color: #0064ed;"/>
+        <panelchildren style="padding:0px">
+            <grid>
+                <columns sizable="true">
+                    <column label="ID" width="50px"/>
+                    <column label="Information" width="180px"/>
+                    <column label="History" width="150px"/>
+                    <column label="Group member" width="160px"/>
+                    <column label="Message" width="200px"/>
+                    <column label="Current Order" width="850px"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="1"/>
+
+                        <vlayout>
+                            <label id="lbGroupLeaderName" value="Name"/>
+                            <label value="Postition: leader"/>
+                            <label value="ID:"/>
+                            <label value="Calender:"/>
+                            <label value="KPI-point:"/>
+                            <label value="Team:"/>
+                            <label value="Group:"/>
+                        </vlayout>
+                        <vlayout>
+                            <label value="history 1"/>
+                            <label value="history 2"/>
+                            <label value="history 3"/>
+                        </vlayout>
+                        <vlayout>
+                            <label value="Enginneer 1"/>
+                            <label value="Enginneer 2"/>
+                            <label value="Enginneer 3"/>
+                        </vlayout>
+                        <label value="You have . . . . "/>
+                        <div>
+                            <panel id="curentOrderDiv"  collapsible="true">
+                                <caption label="Current Order" style="padding:0px;color: #0064ed;"/>
+                                <panelchildren style="padding:0px">
+
+                                    <grid>
+                                        <columns>
+                                            <column label="Order Number"
+                                                    width="150px"/>
+                                            <column label="Action needed from Group Leader" width="470px"/>
+                                            <column label="Deadline" width="200px"/>
+                                        </columns>
+                                        <rows>
+                                            <row>
+                                                <label value="001-002"/>
+                                                <label value="You has been assigned for this order, please confirm"/>
+                                                <label value=""/>
+                                            </row>
+                                            <row>
+                                                <label value="001-003"/>
+                                                <label value="You are prossessing the order"/>
+                                                <label value=""/>
+                                            </row>
+                                            <row>
+                                                <label value="001-004"/>
+                                                <label value="Order close"/>
+                                                <label value=""/>
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                </panelchildren>
+                            </panel>
+
+
+                        </div>
+                    </row>
+                </rows>
+            </grid>
+        </panelchildren>
+    </panel>
+</zk>

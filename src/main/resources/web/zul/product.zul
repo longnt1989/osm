@@ -1,0 +1,238 @@
+<panel id="productDiv" border="1px solid" style="width: 7000px" collapsible="true"  open="false" >
+	<caption label="Product" style="padding:0px;color: #0064ed;" />
+	<panelchildren style="padding:0px; margin-left:20px">
+		<div style="width:100%;height:40px">
+			<div width="100%" style="float:left">
+
+				<label value="Formula Order" style="font-size: 18px; text-align: center; margin-bottom:10px;
+                    height: 40px;padding-top: 8px;float:left" />
+			</div>
+		</div>
+		<panel collapsible="true" width="1000px">
+			<caption label="General infomation" style="padding:0px;color: #0064ed;" />
+			<panelchildren style="padding:0px">
+				<grid style="overflow: hidden;">
+					<columns sizable="true">
+						<column label="" width="300px" />
+						<column label="" />
+					</columns>
+					<rows>
+						<row>
+							<label value="Order number" />
+							<label value="" />
+						</row>
+						<row>
+							<label value="Related to the Request ( Offer)-Number" />
+							<label value="" />
+						</row>
+						<row>
+							<label value="Client" />
+							<label value="" />
+						</row>
+						<row>
+							<label value="Contractor" />
+							<label value="" />
+						</row>
+						<row>
+							<label value="Creation by" />
+							<label value="" />
+						</row>
+						<row>
+							<label value="Creation Date" />
+							<label value="" />
+						</row>
+						<row>
+							<cell colspan="2">
+								<label value="Date and signature and full name" />
+							</cell>
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+		<panel collapsible="true"  width="1000px">
+			<caption label="Description of the Order" style="padding:0px;color: #0064ed;" />
+			<panelchildren style="padding:0px">
+				<label style="float: left;border: 1px solid #4fb7ff;padding: 10px; color: #5252f3;"
+					value="The offer consists of the planning service for the filigree floor for Dutch customer. 
+							Production site is the Netherlands. Large of filigree floor varies.Customers want to have the static calculation and 
+							drawings per single floor. The contractor can choose the software for the static calculation part but for the drawing 
+							part the customer requested the contractor to use Planbar. It should be 50000 m2 floor per year (about 1-2 floor per day). 
+							Customers want to start planning as soon as possible. Detailed information will be described in the following page." />
+			</panelchildren>
+		</panel>
+		<panel collapsible="true" width="100%">
+			<caption label="Scope of supply (delivered files)" style="padding:0px;color: #0064ed;" />
+			<panelchildren style="padding:0px">
+				<grid>
+					<columns sizable="true">
+						<column label="Nr." width="100px" />
+						<column label="Interaction" />
+						<column label="Order of the german side" />
+						<column label="Submission deadline of the Order" />
+						<column label="Confirm from vietnamese side for recieving the Order" />
+						<column label="Indication from Team Leader for Engineer" />
+						<column label="Data name" />
+						<column label="" />
+						<column label="Format date" />
+						<column label="Number of units" />
+						<column label="Expected delivery time" />
+						<column label="Notice" />
+						<column label="Sample" />
+						<column label="Oder processing" width="3000px" />
+						<column label="Submission for German side" width="1000px" />
+						<column label="Submission for German side" />
+					</columns>
+					<rows>
+						<row>
+							<a>
+								<image src="/img/iconAdd.png" style="width: 50px;" />
+							</a>
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+						</row>
+						<row>
+							<label value="1" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<label value="" />
+							<panel collapsible="true" width="100%">
+								<caption label="Order processing" style="padding:0px;color: #0064ed;" />
+								<panelchildren style="padding:0px">
+									<grid>
+										<columns sizable="true">
+											<column label="Id" width="100px" />
+											<column label="Interaction inside Phuc Tien" />
+											<column label="Deadline" />
+											<column label="Submission for Group Leader" width="1200px" />
+											<column label="Submission Date for Team Leader" width="1200px" />
+										</columns>
+										<rows>
+											<row>
+												<label value="" />
+												<label value="" />
+												<label value="" />
+												<panel collapsible="true" width="100%">
+													<caption label="Submission for Group Leader " style="padding:0px;color: #0064ed;" />
+													<panelchildren style="padding:0px">
+														<grid>
+															<columns sizable="true">
+																<column label="Id" width="200px" />
+																<column label="Deadline of the Submission for Group Leader" />
+																<column label="Date of the submission" />
+																<column label="Submission data" />
+																<column label="Confirmation from Group Leader" />
+															</columns>
+															<rows>
+																<row>
+																	<label value="1" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																</row>
+																<row>
+																	<label value="2" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																</row>
+															</rows>
+														</grid>
+													</panelchildren>
+												</panel>
+
+												<panel collapsible="true" width="100%">
+													<caption label="Submission for Team Leader " style="padding:0px;color: #0064ed;" />
+													<panelchildren style="padding:0px">
+														<grid>
+															<columns sizable="true">
+																<column label="Id" width="200px" />
+																<column label="Deadline of the Submission for Team Leader" />
+																<column label="Date of the submission" />
+																<column label="Submission data" />
+																<column label="Confirmation from Team Leader" />
+															</columns>
+															<rows>
+																<row>
+																	<label value="1" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																</row>
+																<row>
+																	<label value="2" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																	<label value="" />
+																</row>
+															</rows>
+														</grid>
+													</panelchildren>
+												</panel>
+
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+							<panel collapsible="true" width="100%">
+								<caption label="Submission for German side " style="padding:0px;color: #0064ed;" />
+								<panelchildren style="padding:0px">
+									<grid>
+										<columns sizable="true">
+											<column label="Id" width="200px" />
+											<column label="Deadline of the Submission for German side" />
+											<column label="Date of the submission" />
+											<column label="Submission data" />
+										</columns>
+										<rows>
+											<row>
+												<label value="1" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+											</row>
+											<row>
+												<label value="2" />
+												<label value="" />
+												<label value="" />
+												<label value="" />
+											</row>
+										</rows>
+									</grid>
+								</panelchildren>
+							</panel>
+							<label value="" />
+						</row>
+					</rows>
+				</grid>
+			</panelchildren>
+		</panel>
+	</panelchildren>
+</panel>

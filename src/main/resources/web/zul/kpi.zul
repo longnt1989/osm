@@ -1,0 +1,93 @@
+<panel id="panelKPI" border="1px solid" collapsible="true" style="width: 2700px" open="false" >
+	<caption label="KPI Measurement" style="padding:0px;color: #0064ed;" />
+	<panelchildren style="padding:0px">
+		<grid>
+			<columns sizable="true">
+				<column label="Task" width="200px" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+			</columns>
+			<rows>
+				<row style="background: #ddd;">
+					<label sclass="lbHeader" value="Task-Nr." />
+					<label sclass="lbHeader" value="Name of the Task" />
+					<label sclass="lbHeader" value="Related Order Nr." />
+					<label sclass="lbHeader" value="Task-processed from" />
+					<label sclass="lbHeader" value="Deadline of the Task" />
+					<label sclass="lbHeader" value="" />
+					<label sclass="lbHeader" value="" />
+					<label sclass="lbHeader" value="" />
+				</row>
+				<row>
+					<textbox inplace="true" width="100%" value="001" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+				</row>
+				<row>
+					<textbox inplace="true" width="100%" value="002" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+				</row>
+			</rows>
+		</grid>
+		<grid>
+			<columns sizable="true">
+				<column label="Order" width="200px" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+				<column label="" />
+			</columns>
+			<rows>
+				<row style="background: #ddd;">
+					<label sclass="lbHeader" value="Order Nr." />
+					<label sclass="lbHeader" value="Realeted Task Nr." />
+					<label sclass="lbHeader" value="Name of the Order" />
+					<label sclass="lbHeader" value="Order- Processed from" />
+					<label sclass="lbHeader" value="Deadline of the Order" />
+					<label sclass="lbHeader" value="Nummer of Order Submission for Group Leader" />
+					<label sclass="lbHeader" value="Nummer of Order Submission for Group Team Leader" />
+					<label sclass="lbHeader" value="Nummer of Order Submission for German side" />
+				</row>
+				<row>
+					<textbox inplace="true" width="100%" value="001-001" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+				</row>
+				<row>
+					<textbox inplace="true" width="100%" value="001-002" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+					<textbox inplace="true" width="100%" value="" />
+				</row>
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>

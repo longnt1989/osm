@@ -1,0 +1,74 @@
+<zk xmlns:n="native">
+	<?link rel="stylesheet" href="/css/login.css"?>
+	<div id="parent" sclass="login-page signup-login-page"
+		apply="com.pt.osm.controller.RegisterController">
+		<n:div sclass="form formSigup">
+			<n:div sclass="logo">
+				<n:img src="/img/iconLogo.png" alt="Logo"
+					style="height: 45px;" />
+			</n:div>
+			<div id="divMain" sclass="login-form signup-form">
+				<label id="labelAll" sclass="lblmessageSigup" />
+				<n:div class="divUsername">
+					<textbox sclass="textbox" id="tbName"
+						placeholder="Name" />
+					<n:a id="aUsername">
+						<image id="imageDeleteName" src="/img/delete.png" />
+					</n:a>
+				</n:div>
+				<label id="labelName" sclass="lblmessageSigup" />
+				<n:div class="divUsername">
+					<textbox type="email" sclass="textbox" id="tbEmail"
+						placeholder="Email" />
+					<n:a id="aUsername">
+						<image id="imageDeleteMail" src="/img/delete.png" />
+					</n:a>
+				</n:div>
+				<label id="labelEmail" sclass="lblmessageSigup" />
+				<n:div class="divUsername">
+					<textbox sclass="textbox" id="tbPhonenumber"
+						placeholder="Phone number" />
+					<n:a id="aUsername">
+						<image id="imageDeletePhone" src="/img/delete.png" />
+					</n:a>
+				</n:div>
+				<label id="labelPhone" sclass="lblmessageSigup" />
+				<n:div class="divUsername">
+					<textbox sclass="textbox" id="tbPassword" type="password"
+						placeholder="Password" />
+					<n:a id="aUsername">
+						<image id="imageDeletePass" src="/img/delete.png" />
+					</n:a>
+					<n:a id="aUsername">
+						<image id="imageShowPass" src="/img/showPass.png" />
+					</n:a>
+				</n:div>
+				<label id="labelPass" sclass="lblmessageSigup" />
+				<n:div class="divUsername">
+					<textbox sclass="textbox" id="tbPasswordConfirm"
+						type="password" placeholder="Confirm password" />
+					<n:a id="aUsername">
+						<image id="imageDeleteConfirmPass"
+							src="/img/delete.png" />
+					</n:a>
+					<n:a id="aUsername">
+						<image id="imageShowConfirmPass"
+							src="/img/showPass.png" />
+					</n:a>
+				</n:div>
+				<label id="labelConfirm" sclass="lblmessageSigup" />
+				<button id="btnSubmit" style="margin-top: 2px;">Sign up</button>
+
+			</div>
+		</n:div>
+		<n:div sclass="formBottom">
+			<label id="pDontAcc" sclass="message">Have an account ?</label>
+			<a id="aSignUp" sclass="a b" href="/">Login</a>
+		</n:div>
+	</div>
+	<n:footer sclass="footer">
+		<n:div class="copyright">
+			Copyright © 2019 | Phuc Tien. All rights reserved
+		</n:div>
+	</n:footer>
+</zk>

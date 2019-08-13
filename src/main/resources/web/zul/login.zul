@@ -1,0 +1,67 @@
+<zk xmlns:n="native">
+	<?link rel="stylesheet" href="/css/login.css"?>
+	<div id="parent" sclass="login-page"
+		apply="com.pt.osm.controller.LoginController">
+
+		<n:div sclass="form">
+			<n:div sclass="logo">
+				<n:img src="/img/iconLogo.png" alt="logologin"
+					style="height: 45px;" />
+			</n:div>
+			<div id="divMain" sclass="login-form">
+				<n:div class="divUsername">
+					<textbox sclass="textbox" id="tbuser"
+						placeholder="Email" />
+					<n:a id="aUsername">
+						<image id="imageDeleteName"
+							src="/img/delete.png" />
+					</n:a>
+				</n:div>
+				<label id="labelName" sclass="lblmessage" />
+				<n:div class="divUsername">
+					<textbox sclass="textbox longnt" id="tbpass"
+						placeholder="Password" />
+					<n:a id="aPass">
+						<image id="imageDeletePass"
+							src="/img/delete.png" />
+					</n:a>
+					<n:a id="aUsername">
+						<image id="imageShowPass"
+							src="/img/showPass.png" />
+					</n:a>
+				</n:div>
+				<label id="labelPass" sclass="lblmessage" />
+				<button id="btnLogin">Login</button>
+				<n:div
+					style="width:50%;margin-top: 15px;float: left;">
+					<checkbox id="chbRemember" sclass="chkRemember" />
+					<label id="lbRemember" value="Remember me"
+						style="font-size: 14px;float: left;padding-top: 1px;">
+					</label>
+				</n:div>
+				<n:p sclass="message"
+					style="width: 50%;color:#31bd8c; font-size: 13px; text-align:right;margin-top: 15px;">
+					<a id="aForgot" style="font-size:13px;"
+						sclass="a">
+						Forgot password?
+					</a>
+				</n:p>
+
+
+			</div>
+		</n:div>
+		<div id="divBottom" sclass="formBottom">
+			<label id="pDontAcc" sclass="message">
+				Don’t have account?
+			</label>
+			<a id="aSignUp" sclass="a b" href="register">
+				Sign up
+			</a>
+		</div>
+	</div>
+	<n:footer sclass="footer">
+		<n:div class="copyright">
+			Copyright © 2019 | Phuc Tien. All rights reserved
+		</n:div>
+	</n:footer>
+</zk>

@@ -1,0 +1,57 @@
+<panel id="enginnerDiv" border="1px solid" collapsible="true" open="false"
+style="width: 1600px" apply="com.pt.osm.controller.EngineerController">
+	<caption label="Engineer" style="padding:0px;color: #0064ed;" />
+	<panelchildren style="padding:0px">
+		<grid>
+			<columns sizable="true">
+				<column label="ID" width="50px" />
+				<column label="Information" width="180px" />
+				<column label="History" width="100px" />
+				<column label="Message" width="200px" />
+				<column label="Current Order" width="1000px" />
+			</columns>
+			<rows>
+				<row>
+					<label value="" />
+					<vlayout>
+						<label id="lbEnginerName" value="Name" />
+						<label value="Postition" />
+						<label value="Id" />
+						<label value="Team" />
+						<label value="Group" />
+					</vlayout>
+					<label value="" />
+					<label value="" />
+					<div>
+						<grid>
+							<columns>
+								<column label="Order Number"
+									width="150px" />
+								<column
+									label="Action needed from Engineer" width="500px" />
+								<column label="Deadline" width="300px" />
+							</columns>
+							<rows>
+								<row>
+									<label value="001-002" />
+									<label value="You has been assigned for this order, please confirm" />
+									<label value="" />
+								</row>
+								<row>
+									<label value="001-003" />
+									<label value="You are prossessing the order" />
+									<label value="" />
+								</row>
+								<row>
+									<label value="001-004" />
+									<label value="Order close" />
+									<label value="" />
+								</row>
+							</rows>
+						</grid>
+					</div>
+				</row>
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>

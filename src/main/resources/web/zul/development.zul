@@ -1,0 +1,17 @@
+<panel id="developmentDiv" border="1px solid"  style="width: 3000px" open="false" collapsible="true" apply="com.pt.osm.controller.DevelopmentController">
+	<caption label="Development" style="padding:0px;color: #0064ed;" />
+	<panelchildren style="padding:0px">
+		<grid>
+			<columns sizable="true">
+				<column label="Request-Nr" width="100px" />
+				<column label=""  width="1700px"/>
+				<column label="" />
+			</columns>
+			<rows>
+				<row id="rowDevelopment">
+
+				</row>
+			</rows>
+		</grid>
+	</panelchildren>
+</panel>
