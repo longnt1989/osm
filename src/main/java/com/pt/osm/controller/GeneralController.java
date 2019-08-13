@@ -80,7 +80,7 @@ public class GeneralController extends SelectorComposer<Component> {
 		txtNumber.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				homeController.showRequestDetail();
+				homeController.showRequestDetail(rq);
 
 			}
 		});
@@ -125,14 +125,17 @@ public class GeneralController extends SelectorComposer<Component> {
 		deadline.setInplace(true);
 
 		A aOdder = new A("");
-		Image imgOdder = new Image("/img/iconLoad.jfif");
+		Image imgOdder = new Image("/img/iconLoad.gif");
 		imgOdder.setParent(aOdder);
 		imgOdder.setStyle("height: 20px;");
 		aOdder.setParent(row);
 
-		A btn = new A("Delete");
-		btn.setParent(row);
-		btn.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+		A aDelete = new A("");
+		Image imgDelete = new Image("/img/iconRemove.png");
+		imgDelete.setParent(aDelete);
+		imgDelete.setStyle("height: 20px;");
+		aDelete.setParent(row);
+		aDelete.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				requestService.deleteRequest(rq);

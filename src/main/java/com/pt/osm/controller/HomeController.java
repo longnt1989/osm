@@ -18,6 +18,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Panel;
 
 import com.pt.osm.component.DivChat;
+import com.pt.osm.model.Request;
 import com.pt.osm.model.User;
 
 public class HomeController extends SelectorComposer<Component> {
@@ -35,6 +36,7 @@ public class HomeController extends SelectorComposer<Component> {
 	@Wire
 	A aCreateReq;
 	private GeneralController generalController;
+	private Request request;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -45,8 +47,8 @@ public class HomeController extends SelectorComposer<Component> {
 				generalController.createRequest();
 			};
 		});
-		aData.setVisible(false);
-		aDetail.setVisible(false);
+//		aData.setVisible(false);
+//		aDetail.setVisible(false);
 		aBoard.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
 				generalController = loadRequest();
@@ -58,7 +60,7 @@ public class HomeController extends SelectorComposer<Component> {
 		});
 		aDetail.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
-				showRequestDetail();
+				showRequestDetail(request);
 				aDetail.setStyle("width:15px; height:15px; border-radius:15px; background:#0064ed;float:right;margin-right:15px;margin-top: 15px ");
 				aData.setStyle("width:15px; height:15px; border-radius:15px; border:1px solid;float:right;margin-right:15px;margin-top: 15px ");
 			};
@@ -67,11 +69,18 @@ public class HomeController extends SelectorComposer<Component> {
 		aData.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
 				parent.getChildren().clear();
-				Include curren = new Include("~./zul/dataofrequest.zul");
-				curren.setHeight("auto");
-				curren.setParent(parent);
-				Include offer = new Include("~./zul/dataofoffer.zul");
-				offer.setParent(parent);
+
+				Map<String, Object> params = new HashMap<String, Object>();
+				Panel general = (Panel) Executions.createComponents("~./zul/dataofrequest.zul", null, params);
+				general.setParent(parent);
+				DevelopmentReqController generalController = ((DevelopmentReqController) general.getAttribute("DevelopmentReqController"));
+				generalController.setRequest(request);
+				
+				Panel dataOffer = (Panel) Executions.createComponents("~./zul/dataofoffer.zul", null, params);
+				dataOffer.setParent(parent);
+				DevelopmentOfferController offerController = ((DevelopmentOfferController) dataOffer.getAttribute("DevelopmentOfferController"));
+				offerController.setRequest(request);
+				
 				aData.setStyle("width:15px; height:15px; border-radius:15px; background:#0064ed;float:right;margin-right:15px;margin-top: 15px ");
 				aDetail.setStyle("width:15px; height:15px; border-radius:15px; border:1px solid;float:right;margin-right:15px;margin-top: 15px ");
 			};
@@ -91,12 +100,15 @@ public class HomeController extends SelectorComposer<Component> {
 		DivChat divChatG = new DivChat(-1, DivChat.View_Request, 0);
 		divChatG.setParent(divChat);
 		generalController.setHome(this);
+		aDetail.setStyle("width:15px; height:15px; border-radius:15px; background:#0064ed;float:right;margin-right:15px;margin-top: 15px ");
+		aData.setStyle("width:15px; height:15px; border-radius:15px; border:1px solid;float:right;margin-right:15px;margin-top: 15px ");
 		aData.setVisible(false);
 		aDetail.setVisible(false);
 		return generalController;
 	}
 
-	public void showRequestDetail() {
+	public void showRequestDetail(Request request) {
+		this.request = request;
 		parent.getChildren().clear();
 		Include curren = new Include("~./zul/development.zul");
 		curren.setParent(parent);

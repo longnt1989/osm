@@ -1,44 +1,27 @@
-<panel >
-	<caption label="Data of the Offer" style="padding:0px;color: white;" />
+<panel id="developmentOfferDiv" apply="com.pt.osm.controller.DevelopmentOfferController">
+	<caption style="padding:0px;color: white;">
+		<a id="aAddOfferData">
+			<image src="/img/iconAddData.png" style="height:25px;"></image>
+		</a>
+
+		<label style="font-size:18px; color:white">Data of the Offer</label>
+	</caption>
 	<panelchildren style="padding:0px">
 		<grid>
-			<columns sizable="true" >
-				<column label="Nr" width="80px;" />
-				<column label="Data name" width="100px" />
-				<column label="Data format" width="100px" />
-				<column label="Amount" width="100px"/>
-				<column label="Delivery time" width="150px" />
-				<column label="Note" />
-				<column label="Submission" width="100px" />
-				<column label="Time" width="50px" />
-				<column label="Responsible" width="100px" />
-				<column label="" width="80px" />
+			<columns sizable="true">
+				<column label="Nr" width="80px;" style="background:#089fe3"/>
+				<column label="Data name" width="100px" style="background:#089fe3"/>
+				<column label="Data format" width="100px" style="background:#089fe3"/>
+				<column label="Amount" width="100px" style="background:#089fe3"/>
+				<column label="Delivery time" width="150px" style="background:#089fe3"/>
+				<column label="Note" style="background:#089fe3"/>
+				<column label="Submission" width="100px" style="background:#089fe3"/>
+				<column label="Time" width="50px" style="background:#089fe3"/>
+				<column label="Responsible" width="100px" style="background:#089fe3"/>
+				<column label="" width="80px" style="background:#089fe3"/>
 			</columns>
-			<rows>
-				<row>
-					<label value="001" />
-					<label value="1" />
-					<label value="PDF" />
-					<label value="10" />
-					<label value="Everyweek" />
-					<label value="" />
-					<label value="" />
-					<label value="" />
-					<label value="" />
-					<image src="/img/iconConfirm.jpg" style="height: 20px; margin-top:5px" />
-				</row>
-				<row>
-					<label value="002" />
-					<label value="2" />
-					<label value="PDF" />
-					<label value="10" />
-					<label value="Everyweek" />
-					<label value="" />
-					<label value="" />
-					<label value="" />
-					<label value="" />
-					<image src="/img/iconConfirm.jpg" style="height: 20px; margin-top:5px" />
-				</row>
+			<rows id="rowsOfferData">
+
 			</rows>
 		</grid>
 	</panelchildren>

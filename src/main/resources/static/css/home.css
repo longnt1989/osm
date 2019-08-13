@@ -25,13 +25,13 @@
 
 .z-panel-header {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: normal;
     font-style: normal;
     color: rgba(0,0,0,0.57);
     border: 0;
-    padding: 6px;
-    padding-left: 5px;
+    padding: 3px;
+    padding-left: 10px;
     line-height: 24px;
     overflow: hidden;
     zoom: 1;
@@ -41,7 +41,7 @@
     overflow: hidden;
     zoom: 1;
     padding: 0;
-    background: #09a2e3;
+    background: #14872c;
     -webkit-border-radius: 0px;
     -moz-border-radius: 4px;
     -o-border-radius: 4px;
@@ -57,7 +57,7 @@
 }
 
 .z-column {
-    background: #09a2e3;
+    background: #14872c;
     border-left: 1px solid #0064ed;
     border-bottom: 1px solid #0064ed;
     padding: 0;

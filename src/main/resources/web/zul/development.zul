@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	<div vflex="1" style="margin-top:20px">
-		<panel width="300px" style="float: left;margin-right:20px">
+		<panel width="300px" style="float: left;margin-right:20px; background:#089fe3">
 			<caption label="General infomation" style="padding:0px;color: white" />
 			<panelchildren style="padding:0px">
 				<grid style="overflow: hidden;">
@@ -68,9 +68,11 @@
 				</grid>
 			</panelchildren>
 		</panel>
-		<panel hflex="1" height="500px" style="border:1px solid #09a2e3">
+		<panel hflex="1" style="border:1px solid #09a2e3; background:#089fe3">
 			<caption label="Description of the request" style="padding:0px;color: white" />
-			<panelchildren style="padding:0px"></panelchildren>
+			<panelchildren style="padding:0px">
+			 <textbox rows="20" style="width:100%; height:100%"></textbox>
+			</panelchildren>
 		</panel>
 	</div>
 </div>

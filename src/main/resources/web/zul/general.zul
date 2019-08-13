@@ -9,10 +9,10 @@
 				<column label="Name" />
 				<column label="Programm" width="100px" />
 				<column label="Owner" />
-				<column label="Training Material" width="133px" />
+				<column label="Training" width="70px" />
 				<column label="Deadline" />
 				<column label="Status" width="60px" />
-				<column label="Action" width="100px" />
+				<column label=""  width="40px" />
 			</columns>
 			<rows id="rowsGeneral">
 

@@ -1,10 +1,10 @@
 <zk xmlns:n="native">
 	<?link rel="stylesheet" href="/css/home.css"?>
 	<?link rel="stylesheet" href="/css/login.css"?>
-	<div hflex="1" vflex="1" style="width:100%; height: 100%; background-color:#09a2e3;" apply="com.pt.osm.controller.HomeController">
+	<div style="width:100%; height: 100%; background-color:#09a2e3;" apply="com.pt.osm.controller.HomeController">
 		<div  hflex="1" style="margin-right:10px;margin-left:10px; height:100%; float:left;">
 			<div  style="margin-top:10px; height:50px; width:100%; float:left; background-color:white">
-				<div hflex="3" style="float:left">
+				<div hflex="2" style="float:left">
 					<a id="aCreateReq">
 						<image src="/img/iconCreateReq.png" style="height: 46px; margin-left:10px; margin-top:2px" />
 					</a>
@@ -12,8 +12,8 @@
 
 					<a style="height:45px; margin-top:2px; padding:10px; padding-top:8px; text-decoration:none; margin-left:10px">My Task</a>
 				</div>
-				<div hflex="1" style="text-align:center; height:50px;float:left">
-					<n:img hflex="1" src="/img/iconLogo.png" alt="logologin" style="height: 45px;" />
+				<div  style="text-align:center; height:50px; float:left">
+					<n:img hflex="1" src="/img/iconLogo.png" alt="logologin" style="width: 90px; margin-top:5px" />
 				</div>
 				<div hflex="3" style="float:left">
 					<n:img src="/img/iconChatTask.png" style="height: 40px; float:right; margin-right:10px;margin-top:5px" />
@@ -30,7 +30,7 @@
 
 			</div>
 		</div>
-		<div width="300px" id="divChat" style="height:100%;float:left;">
+		<div width="280px" id="divChat" style="height:100%;float:left;">
 
 		</div>
 	</div>

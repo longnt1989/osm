@@ -57,26 +57,7 @@ public class DevelopmentController extends SelectorComposer<Component> {
 	}
 	
 	public void setOffer(Request request) {
-		rowDevelopment.getChildren().clear();
-		Label lb = new Label(request.getRequestNumber());
-		lb.setParent(rowDevelopment);
-		Map<String, Object> params = new HashMap<String, Object>();
-		Offer offer = requestService.findByRequestId(request.getId());
-		if(offer==null) {
-			offer = new Offer();
-			offer.setOfferNumber(request.getRequestNumber());
-			offer.setCreateDate(new Date());
-			offer.setRequestId(request.getId());
-			offer = requestService.saveOffer(offer);
-		}
-		offer.setOfferNumber(request.getRequestNumber());
-		params.put("offer", offer);
-		Panel developmentOfferDiv = (Panel) Executions.createComponents("~./zul/develop_offer.zul", null, params);
-		developmentOfferDiv.setParent(rowDevelopment);
-		DevelopmentOfferController developmentOfferController = (DevelopmentOfferController)developmentOfferDiv.getAttribute("DevelopmentOfferController");
-		developmentOfferController.setOffer(offer);
-		Label lb1 = new Label();
-		lb1.setParent(rowDevelopment);
+
 	}
 
 }

@@ -100,11 +100,15 @@ public class RequestService {
 		return dataOfferRepository.save(dataOffer);
 	}
 	
+	public void deleteDataOffer(DataOffer dataOffer) {
+		dataOfferRepository.delete(dataOffer);
+	}
+	
 	public Payment savePayment(Payment payment) {
 		return paymentRepository.save(payment);
 	}
 	
-	public List<DataOffer> findAllDataOffer(Offer offer) {
+	public List<DataOffer> findAllDataOffer(Request offer) {
 		return dataOfferRepository.findByOfferId(offer.getId());
 	}
 	

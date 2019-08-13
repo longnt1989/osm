@@ -1,41 +1,26 @@
-<panel >
-	<caption label="Data of the Request" style="padding:0px;color: white;" />
+<panel id="developmentOrderDiv" apply="com.pt.osm.controller.DevelopmentReqController">
+	<caption style="padding:0px;color: white;">
+		<a id="aDataRequest">
+			<image src="/img/iconAddData.png" style="height:25px;"></image>
+		</a>
+
+		<label style="font-size:18px; color:white">Data of the Request</label>
+	</caption>
 	<panelchildren style="padding:0px">
 		<grid>
-			<columns sizable="true" >
-				<column label="Nr" width="80px;" />
-				<column label="Data name" width="100px" />
-				<column label="Data format" width="100px" />
-				<column label="Amount" width="100px"/>
-				<column label="Delivery time" width="150px" />
-				<column label="Note" />
-				<column label="Attachtment" width="100px" />
-				<column label="Responsible" width="100px" />
-				<column label="" width="80px" />
+			<columns sizable="true">
+				<column label="Nr" width="80px;" style="background:#089fe3"/>
+				<column label="Data name" width="100px" style="background:#089fe3" />
+				<column label="Data format" width="100px" style="background:#089fe3"/>
+				<column label="Amount" width="100px" style="background:#089fe3"/>
+				<column label="Delivery time" width="150px" style="background:#089fe3"/>
+				<column label="Note" style="background:#089fe3"/>
+				<column label="Attachtment" width="100px" style="background:#089fe3"/>
+				<column label="Responsible" width="100px" style="background:#089fe3"/>
+				<column label="" width="80px" style="background:#089fe3"/>
 			</columns>
-			<rows>
-				<row>
-					<label value="001" />
-					<label value="1" />
-					<label value="PDF" />
-					<label value="10" />
-					<label value="Everyweek" />
-					<label value="" />
-					<label value="" />
-					<label value="" />
-					<image src="/img/iconConfirm.jpg" style="height: 20px; margin-top:5px" />
-				</row>
-				<row>
-					<label value="002" />
-					<label value="2" />
-					<label value="PDF" />
-					<label value="10" />
-					<label value="Everyweek" />
-					<label value="" />
-					<label value="" />
-					<label value="" />
-					<image src="/img/iconConfirm.jpg" style="height: 20px; margin-top:5px" />
-				</row>
+			<rows id="rowsOrderDev">
+				
 			</rows>
 		</grid>
 	</panelchildren>
