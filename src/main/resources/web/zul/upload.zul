@@ -1,0 +1,42 @@
+<zk xmlns:n="native">
+    <div id="parent" sclass="login-page signup-login-page"
+         apply="com.pt.osm.controller.UploadController">
+
+        <hlayout width="480px" height="500px" style="overflow: auto;">
+            <grid hflex="min" model="@init(vm.allBooks) @template('row')">
+                <columns height="22px">
+                    <column width="50px" label=""/>
+                    <column width="400px" label=""/>
+                </columns>
+                <rows id="rowsGeneral">
+
+                </rows>
+            </grid>
+        </hlayout>
+        <grid hflex="min" model="@init(vm.allBooks) @template('row')">
+            <columns height="22px">
+                <column width="350px" label=""/>
+                <column width="100px" label=""/>
+            </columns>
+            <rows>
+                <row>
+                    <div apply="org.zkoss.bind.BindComposer"
+                         viewModel="@id('vm') @init('com.pt.osm.controller.UploadController')">
+                        <button id="btnUpload" label="" upload="true,maxsize=3000000" image="/img/add.png"
+                                onUpload="@command('upload', media=event.media)"/>
+                        <button id="btnSearch" label="" image="/img/search.png"/>
+                        <button id="btnDownload" onClick="@command('download')" label="" image="/img/download.png" />
+                        <button id="btnDelete" onClick="@command('delete')" label="" image="/img/delete_bin.png"/>
+                    </div>
+                    <label value=""/>
+                </row>
+
+
+            </rows>
+        </grid>
+
+
+    </div>
+
+
+</zk>

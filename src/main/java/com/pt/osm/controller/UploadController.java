@@ -39,7 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
-public class UploadController  extends SelectorComposer<Component> {
+public class UploadController extends SelectorComposer<Component> {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
@@ -55,6 +55,8 @@ public class UploadController  extends SelectorComposer<Component> {
     private Rows rowsGeneral;
 
     User user = null;
+    private static String fileNameDownload = null;
+    private static String fileLabelDownload = null;
 
     @Override
     public void doAfterCompose(Component comp) throws Exception {
@@ -84,7 +86,7 @@ public class UploadController  extends SelectorComposer<Component> {
                 return;
             }
 
-            if(media == null){
+            if (media == null) {
                 Messagebox.show("Please select a file", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
                 return;
             }
@@ -92,15 +94,15 @@ public class UploadController  extends SelectorComposer<Component> {
             InputStream fin = media.getStreamData();
             in = new BufferedInputStream(fin);
 
-            File baseDir = new File(PropertiesParams.folderUploadUrl);
+            File baseDir = new File(getPathForderUpload());
 
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
             }
             String labelFile = media.getName();
             String[] fileTypeArr = labelFile.split("\\.");
-            String fileName = user.getUsername()+sdf.format(new Date())+"."+fileTypeArr[fileTypeArr.length-1];
-            File file = new File(PropertiesParams.folderUploadUrl + fileName);
+            String fileName = user.getUsername() + sdf.format(new Date()) + "." + fileTypeArr[fileTypeArr.length - 1];
+            File file = new File(getPathForderUpload() + "/" + fileName);
 
             OutputStream fout = new FileOutputStream(file);
             out = new BufferedOutputStream(fout);
@@ -117,7 +119,9 @@ public class UploadController  extends SelectorComposer<Component> {
             uploadLog.setUsername(user.getUsername());
             uploadLogService.save(uploadLog);
             logger.info("sucessed upload :" + media.getName());
-        }catch (Exception ex){
+            //reloadPage
+            loadForm();
+        } catch (Exception ex) {
             logger.error("onUpload error" + ex.getMessage());
         } finally {
             try {
@@ -133,42 +137,102 @@ public class UploadController  extends SelectorComposer<Component> {
         }
     }
 
+    @Command("download")
+    public void onDownload() {
+        try {
+            File dosfile = new File(getPathForderUpload() + "/" + fileNameDownload);
+            if (dosfile.exists()) {
+                FileInputStream inputStream = new FileInputStream(dosfile);
+                Filedownload.save(inputStream, new MimetypesFileTypeMap().getContentType(dosfile), fileLabelDownload);
+            } else {
+                Messagebox.show("Sorry, but the DosPath is Invalid", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
+            }
+        } catch (Exception ex) {
+            logger.error("file download error: " + ex.getMessage());
+        }
+    }
+
+    @Command("delete")
+    public void onDelete() {
+        try {
+            uploadLogService = OsmApplication.ctx.getBean(UploadLogService.class);
+            File dosfile = new File(getPathForderUpload() + "/" + fileNameDownload);
+            Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new EventListener<Event>() {
+                @Override
+                public void onEvent(Event event) throws Exception {
+                    if (event.getName().equals("onOK")) {
+                        if(dosfile.delete()){
+                            System.out.println(fileNameDownload + " is deleted!");
+                            UploadLog uploadLog = uploadLogService.findByName(fileNameDownload);
+                            uploadLogService.delete(uploadLog);
+                        }else{
+                            Messagebox.show("Sorry, but the DosPath is Invalid", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
+                        }
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
+            logger.error("file download error: " + ex.getMessage());
+        }
+    }
 
 
     void loadForm() {
         try {
+
+//            List<Row> rows = rowsGeneral.getChildren();
+//            for (Row row : rows) {
+//                rowsGeneral.removeChild(row);
+//            }
+            rowsGeneral.getChildren().clear();
             List<UploadLog> uploadLogs = uploadLogService.findByUsername(user.getUsername());
             for (UploadLog uploadLog : uploadLogs) {
                 Row row = new Row();
                 row.setParent(rowsGeneral);
-                Label lbName = new Label(uploadLog.getLabel());
-                lbName.setParent(row);
+//                Label lbName = new Label(uploadLog.getLabel());
+//                lbName.setParent(row);
+                Image img = new Image();
+                img.setSrc("/img/file.png");
+                img.setParent(row);
 
+                final int[] flagColor = {0};
                 Div divButton = new Div();
-                A aSave = createBtnSave();
+                A aSave = createBtnSave(uploadLog.getLabel());
                 aSave.setParent(divButton);
                 aSave.setVisible(true);
-
                 aSave.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
                     public void onEvent(Event arg0) throws Exception {
-                        //FileUtils.copyURLToFile(new URL("file:///"+PropertiesParams.folderUploadUrl+uploadLog.getName()), new File("C:\\Users\\minht\\Downloads\\"+uploadLog.getLabel()));
-
                         FileInputStream inputStream;
                         try {
-                            File dosfile = new File(PropertiesParams.folderUploadUrl+uploadLog.getName());
+                            List<Row> rows = rowsGeneral.getChildren();
+                            for (Row row : rows) {
+                                row.setStyle("background-color: white");
+                            }
+                            if (flagColor[0] == 0) {
+                                row.setStyle("background-color: white");
+                                flagColor[0] = 1;
+                                fileNameDownload = null;
+                                fileLabelDownload = null;
+                            } else {
+                                row.setStyle("background-color: orange");
+                                flagColor[0] = 0;
+                                fileNameDownload = uploadLog.getName();
+                                fileLabelDownload = uploadLog.getLabel();
+                            }
+                            /*File dosfile = new File(getPathForderUpload() + "/" + uploadLog.getName());
                             if (dosfile.exists()) {
                                 inputStream = new FileInputStream(dosfile);
                                 Filedownload.save(inputStream, new MimetypesFileTypeMap().getContentType(dosfile), uploadLog.getLabel());
-                            } else{
+                            } else {
                                 Messagebox.show("Sorry, but the DosPath is Invalid", "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
-                            }
+                            }*/
 
-                        } catch (FileNotFoundException e) {
-                            logger.error("file download error: "+e.getMessage());
+                        } catch (Exception e) {
+                            logger.error("choose file error: " + e.getMessage());
                         }
                     }
                 });
-
 
 
                 divButton.setParent(row);
@@ -193,12 +257,23 @@ public class UploadController  extends SelectorComposer<Component> {
     }
 
 
-    A createBtnSave() {
-        A aSave = new A("download");
+    A createBtnSave(String label) {
+        A aSave = new A(label);
+        aSave.setStyle("text-decoration : none; color: black; ");
         /*Image imgCancel = new Image("/img/ok.png");
         imgCancel.setParent(aSave);
         imgCancel.setStyle("width: 25px; margin:5px");*/
         return aSave;
+    }
+
+    public String getPathForderUpload() {
+        String username = System.getProperty("user.home");
+        File baseDir = new File(username + "/upload");
+
+        if (!baseDir.exists()) {
+            baseDir.mkdirs();
+        }
+        return baseDir.getAbsolutePath();
     }
 
 }

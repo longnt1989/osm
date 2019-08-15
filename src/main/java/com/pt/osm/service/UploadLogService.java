@@ -18,6 +18,10 @@ public class UploadLogService {
         return uploadLogRepository.findByUsername(username);
     }
 
+    public UploadLog findByName(String name){
+        return uploadLogRepository.findByName(name);
+    }
+
     public UploadLog save(UploadLog uploadLog){
         return uploadLogRepository.save(uploadLog);
     }

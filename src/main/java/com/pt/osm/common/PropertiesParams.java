@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class PropertiesParams {
     public static String folderUploadUrl;
 
-   // @Value("${osm.upload.folder}")
+    @Value("${osm.upload.folder}")
     private void setFolderUploadUrl(String folderUploadUrl){
         this.folderUploadUrl = folderUploadUrl;
     }

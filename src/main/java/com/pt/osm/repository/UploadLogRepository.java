@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface UploadLogRepository extends JpaRepository<UploadLog, Long> {
     List<UploadLog> findByUsername(String username);
+    UploadLog findByName(String name);
 }
