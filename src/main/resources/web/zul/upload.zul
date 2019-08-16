@@ -1,0 +1,53 @@
+<zk xmlns:n="native">
+    <div id="parent" sclass="login-page signup-login-page"
+         apply="com.pt.osm.controller.UploadController">
+
+        <hlayout width="480px" height="500px" style="overflow: auto;">
+            <grid hflex="min" model="@init(vm.allBooks) @template('row')">
+                <columns height="22px">
+                    <column width="50px" label=""/>
+                    <column width="400px" label=""/>
+                </columns>
+                <rows id="rowsGeneral">
+
+                </rows>
+            </grid>
+        </hlayout>
+        <grid hflex="min" model="@init(vm.allBooks) @template('row')">
+            <columns height="22px">
+                <column width="350px" label=""/>
+                <column width="100px" label=""/>
+            </columns>
+            <rows>
+                <row id="rowSearchUpload">
+                    <textbox sclass="textbox" id="txtSearchUpload" onChange="@command('changetext')"
+                             placeholder="Search"/>
+                    <label value=""/>
+                </row>
+                <row>
+                    <div apply="org.zkoss.bind.BindComposer"
+                         viewModel="@id('vm') @init('com.pt.osm.controller.UploadController')">
+                        <button id="btnUpload" label="" upload="true,maxsize=3000000" image="/img/add.png"
+                                onUpload="@command('upload', media=event.media)"/>
+                        <a style="margin-left: 15px;" id="btnSearch" onClick="@command('search')" label="">
+                            <image src="/img/search.png"/>
+                        </a>
+                        <a style="margin-left: 15px;" id="btnDownload" onClick="@command('download')" label="">
+                            <image src="/img/download.png"/>
+                        </a>
+                        <a style="margin-left: 15px;" id="btnDelete" onClick="@command('delete')" label="">
+                            <image src="/img/delete_bin.png"/>
+                        </a>
+                    </div>
+                    <label value=""/>
+                </row>
+
+
+            </rows>
+        </grid>
+
+
+    </div>
+
+
+</zk>

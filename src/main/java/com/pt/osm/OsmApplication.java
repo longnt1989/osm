@@ -11,73 +11,73 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class OsmApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(OsmApplication.class, args);
-	}
-	
-	public static ApplicationContext ctx;
+    public static void main(String[] args) {
+        SpringApplication.run(OsmApplication.class, args);
+    }
 
-	@Autowired
-	private void setApplicationContext(ApplicationContext applicationContext) {
-		ctx = applicationContext;
-		
-	}
+    public static ApplicationContext ctx;
 
-	@GetMapping("/register")
-	public String register() {
-		return "register";
-	}
-	
+    @Autowired
+    private void setApplicationContext(ApplicationContext applicationContext) {
+        ctx = applicationContext;
 
-	@GetMapping("/home")
-	public String home() {
-		return "home";
-	}
+    }
 
-	@GetMapping("/upload")
-	public String upload() {
-		return "upload";
-	}
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
 
 
-	@GetMapping("/groupleader")
-	public String groupleader() {
-		return "groupleader";
-	}
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
 
-	@GetMapping("/teamleader")
-	public String teamleader() {
-		return "teamleader";
-	}
+    @GetMapping("/upload")
+    public String upload() {
+        return "upload";
+    }
 
-	@GetMapping("/ordermanager")
-	public String ordermanager() {
-		return "ordermanager";
-	}
 
-	@GetMapping("/requesttrainingmanager")
-	public String requesttrainingmanager() {
-		return "requesttrainingmanager";
-	}
+    @GetMapping("/groupleader")
+    public String groupleader() {
+        return "groupleader";
+    }
 
-	@GetMapping("/ceo")
-	public String ceo() {
-		return "ceo";
-	}
-	
-	@GetMapping("/germanside")
-	public String germanside() {
-		return "germanside";
-	}
+    @GetMapping("/teamleader")
+    public String teamleader() {
+        return "teamleader";
+    }
 
-	@GetMapping("/usertype")
-	public String usertype() {
-		return "usertype";
-	}
+    @GetMapping("/ordermanager")
+    public String ordermanager() {
+        return "ordermanager";
+    }
 
-	@GetMapping("/user")
-	public String user() {
-		return "user";
-	}
+    @GetMapping("/requesttrainingmanager")
+    public String requesttrainingmanager() {
+        return "requesttrainingmanager";
+    }
+
+    @GetMapping("/ceo")
+    public String ceo() {
+        return "ceo";
+    }
+
+    @GetMapping("/germanside")
+    public String germanside() {
+        return "germanside";
+    }
+
+    @GetMapping("/usertype")
+    public String usertype() {
+        return "usertype";
+    }
+
+    @GetMapping("/user")
+    public String user() {
+        return "user";
+    }
 
 }

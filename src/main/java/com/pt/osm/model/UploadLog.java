@@ -31,9 +31,38 @@ public class UploadLog implements Serializable {
     private String username;
     @Column(name = "created_time")
     private Date createdTime;
+    @Column(name = "request_id")
+    private Long requestId;
+    private String type;
+    
 
     @PrePersist
     public void addCreatedTime() {
         createdTime = new Date();
     }
+
+    public static enum UploadType {
+
+        REQUEST("REQUEST"),ORDER("ORDER");
+
+        private final String value;
+
+        private UploadType(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return this.value;
+        }
+
+        public static UploadType getEnum(String uploadType) {
+            for (UploadType subside : values()) {
+                if (subside.value == uploadType) {
+                    return subside;
+                }
+            }
+            throw new IllegalArgumentException("No matching constant for [" + uploadType + "]");
+        }
+    }
+    
 }
