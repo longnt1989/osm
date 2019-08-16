@@ -19,14 +19,25 @@
                 <column width="100px" label=""/>
             </columns>
             <rows>
+                <row id="rowSearchUpload">
+                    <textbox sclass="textbox" id="txtSearchUpload" onChange="@command('changetext')"
+                             placeholder="Search"/>
+                    <label value=""/>
+                </row>
                 <row>
                     <div apply="org.zkoss.bind.BindComposer"
                          viewModel="@id('vm') @init('com.pt.osm.controller.UploadController')">
                         <button id="btnUpload" label="" upload="true,maxsize=3000000" image="/img/add.png"
                                 onUpload="@command('upload', media=event.media)"/>
-                        <button id="btnSearch" label="" image="/img/search.png"/>
-                        <button id="btnDownload" onClick="@command('download')" label="" image="/img/download.png" />
-                        <button id="btnDelete" onClick="@command('delete')" label="" image="/img/delete_bin.png"/>
+                        <a style="margin-left: 15px;" id="btnSearch" onClick="@command('search')" label="">
+                            <image src="/img/search.png"/>
+                        </a>
+                        <a style="margin-left: 15px;" id="btnDownload" onClick="@command('download')" label="">
+                            <image src="/img/download.png"/>
+                        </a>
+                        <a style="margin-left: 15px;" id="btnDelete" onClick="@command('delete')" label="">
+                            <image src="/img/delete_bin.png"/>
+                        </a>
                     </div>
                     <label value=""/>
                 </row>
