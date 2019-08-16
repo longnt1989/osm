@@ -1,36 +1,30 @@
 package com.pt.osm.component;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.zkoss.idom.Attribute;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.KeyEvent;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Image;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vlayout;
 import org.zkoss.zul.Window;
 
 import com.pt.osm.OsmApplication;
-import com.pt.osm.common.IObserver;
 import com.pt.osm.common.Observer;
 import com.pt.osm.model.Comment;
 import com.pt.osm.model.User;
 import com.pt.osm.service.RequestService;
 
-public class DivChat extends Vlayout implements IObserver {
+public class DivChat extends Vlayout {
 
-	// private User user;
-	private Vlayout center;
-	private String key;
 	@Autowired
 	private RequestService requestService;
 
@@ -40,12 +34,14 @@ public class DivChat extends Vlayout implements IObserver {
 	public static String View_DataRequest = "DataRequest";
 	public static String View_Budget = "BudgetRequest";
 	public static String View_Payment = "Payment";
+	private String key;
 
 	public DivChat(long linkId, String typeView, int type) {
-		this.key = typeView + String.valueOf(linkId) + String.valueOf(type);
+		String key1 = typeView + String.valueOf(linkId) + String.valueOf(type) + "1";
+		String key2 = typeView + String.valueOf(linkId) + String.valueOf(type) + "2";
+		key = key1;
 		User user = (User) Executions.getCurrent().getSession().getAttribute("user");
 		requestService = OsmApplication.ctx.getBean(RequestService.class);
-		addEventListener();
 		this.setStyle("width:300px;bottom: 10px;position: absolute;background: white");
 		Hlayout divTop = new Hlayout();
 		divTop.setParent(this);
@@ -63,7 +59,7 @@ public class DivChat extends Vlayout implements IObserver {
 				String chat = txt.getValue();
 				Comment comment = new Comment();
 				comment.setContent(chat);
-				comment.setName(user.getFirstName() + " " + user.getLastName());
+				comment.setName("Long");
 				comment.setTypeView(typeView);
 				comment.setRequestId(linkId);
 				comment.setType(type);
@@ -76,10 +72,26 @@ public class DivChat extends Vlayout implements IObserver {
 				txt.setValue("");
 			}
 		});
+		txt.setCtrlKeys("$#up$#down");
+		txt.addEventListener(Events.ON_CTRL_KEY, new EventListener<KeyEvent>() {
+			@Override
+			public void onEvent(KeyEvent event) throws Exception {
+				int keyCode = ((KeyEvent) event).getKeyCode();
+				System.out.println(keyCode);
+				if(event.isShiftKey()) {
+					System.out.println(1);
+				}
 
-		center = new Vlayout();
+			}
+		});
+		
+		ContentLayout center = new ContentLayout(key1, linkId, type, typeView);
 		center.setParent(this);
 		center.setStyle("width:100%; min-height:50px; float:left;border-bottom: 1px solid #d9d9d9;");
+
+		ContentLayout center1 = new ContentLayout(key2, linkId, type, typeView);
+		center1.setParent(this);
+		center1.setStyle("width:100%; min-height:50px; float:left;border-bottom: 1px solid #d9d9d9;");
 
 		Hlayout divBottom = new Hlayout();
 		divBottom.setParent(this);
@@ -140,72 +152,6 @@ public class DivChat extends Vlayout implements IObserver {
 			}
 		});
 
-		List<Comment> lst = requestService.findByRequestIdAndTypeAndTypeView(linkId, type, typeView);
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		for (Comment comment : lst) {
-			loadComment(df, comment);
-		}
 	}
 
-	private void loadComment(DateFormat df, Comment comment) {
-		Hlayout div = new Hlayout();
-		div.setParent(center);
-		div.setStyle("width:100%;padding-bottom: 10px;border-bottom: 1px solid #d9d9d9;");
-		Image imgFlag = new Image("/img/iconFlagVietnam.png");
-		imgFlag.setHeight("40px");
-		imgFlag.setParent(div);
-		Vlayout vlayout = new Vlayout();
-		vlayout.setParent(div);
-		Label lb1 = new Label(comment.getName() + ", " + df.format(comment.getCreateDate()));
-		lb1.setStyle("font-size: 12px;color: gray;");
-		lb1.setParent(vlayout);
-		Label lb = new Label(comment.getContent());
-		lb.setStyle("width:85%; float:left");
-		lb.setParent(vlayout);
-	}
-
-	@Override
-	public void addEventListener() {
-		Observer.addListener(key, this);
-
-	}
-
-	@Override
-	public void removeEventListener() {
-		Observer.removeListener(key, this);
-
-	}
-
-	@Override
-	public void onEvent(String key, Object value) {
-		try {
-			if (this.getDesktop() == null) {
-				removeEventListener();
-			} else {
-				Executions.schedule(this.getDesktop(), new EventListener<Event>() {
-					@Override
-					public void onEvent(Event arg0) throws Exception {
-						if (key.equals(DivChat.this.key)) {
-							DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:ss");
-							Comment comment = (Comment) value;
-							loadComment(df, comment);
-						}
-
-					}
-				}, null);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public boolean isAlive() {
-		boolean result = false;
-		if (this.getDesktop() != null) {
-			result = true;
-		}
-		return result;
-	}
 }
