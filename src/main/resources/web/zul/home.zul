@@ -2,8 +2,8 @@
 	<?link rel="stylesheet" href="/css/home.css"?>
 	<?link rel="stylesheet" href="/css/login.css"?>
 	<div style="width:100%; height: 100%; background-color:#09a2e3;" apply="com.pt.osm.controller.HomeController">
-		<div  hflex="1" style="margin-right:10px;margin-left:10px; height:100%; float:left;">
-			<div  style="margin-top:10px; height:50px; width:100%; float:left; background-color:white">
+		<div hflex="1" style="margin-right:10px;margin-left:10px; height:100%; float:left;">
+			<div style="margin-top:10px; height:50px; width:100%; float:left; background-color:white">
 				<div hflex="2" style="float:left">
 					<a id="aCreateReq">
 						<image src="/img/iconCreateReq.png" style="height: 46px; margin-left:10px; margin-top:2px" />
@@ -12,7 +12,7 @@
 
 					<a style="height:45px; margin-top:2px; padding:10px; padding-top:8px; text-decoration:none; margin-left:10px">My Task</a>
 				</div>
-				<div  style="text-align:center; height:50px; float:left">
+				<div style="text-align:center; height:50px; float:left">
 					<n:img hflex="1" src="/img/iconLogo.png" alt="logologin" style="width: 90px; margin-top:5px" />
 				</div>
 				<div hflex="3" style="float:left">
@@ -30,7 +30,91 @@
 
 			</div>
 		</div>
-		<div width="280px" id="divChat" style="height:100%;float:left;">
+		<div width="300px" id="divChat" style="height:100%;float:left;padding-top:10px">
+			<vlayout vflex="1" style="width: 300px;">
+				<div vflex="1" style="width: 300px;">
+					<div vflex="1" style="width: 300px;">
+						<div style="background: #14852a;width: 300px;height: 40px;">
+							<image src="/img/3.png" style="height: 20px;float:left;margin-top: 8px;margin-left: 10px;" />
+							<label style="color: white; padding-left: 10px;margin-top: 10px;float: left;">Static</label>
+							<a>
+								<image src="/img/iconAddMember1.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+							</a>
+							<a>
+								<image src="/img/iconDeleteRed.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+							</a>
+							<a>
+								<image src="/img/iconQuestion.png" style="height: 25px;float:right;margin-top: 5px;margin-right: 10px;" />
+							</a>
+						</div>
+						<div id="divChat3" vflex="1" style="width: 300px;background: white;">
+
+						</div>
+					</div>
+				</div>
+				<div vflex="1" style="width: 300px;">
+					<div vflex="1" style="width: 300px;">
+						<div style="background: #14852a;width: 300px;height: 40px;">
+						<image src="/img/2.png" style="height: 20px;float:left;margin-top: 8px;margin-left: 10px;" />
+							<label style="color: white; padding-left: 10px;margin-top: 10px;float: left;">Budget</label>
+							<a>
+								<image src="/img/iconAddMember1.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+							</a>
+							<a>
+								<image src="/img/iconDeleteRed.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+							</a>
+							<a>
+								<image src="/img/iconQuestion.png" style="height: 25px;float:right;margin-top: 5px;margin-right: 10px;" />
+							</a>
+						</div>
+						<div id="divChat2" vflex="1" style="width: 300px;background: white;">
+
+						</div>
+					</div>
+				</div>
+				<div vflex="1" style="width: 300px;">
+					<div style="background: #14852a;width: 300px;height: 40px;">
+					<image src="/img/1.png" style="height: 20px;float:left;margin-top: 8px;margin-left: 10px;" />
+						<label style="color: white; padding-left: 10px;margin-top: 10px;float: left;">Technic</label>
+						<a>
+							<image src="/img/iconAddMember1.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+						</a>
+						<a>
+							<image src="/img/iconDeleteRed.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+						</a>
+						<a>
+							<image src="/img/iconQuestion.png" style="height: 25px;float:right;margin-top: 5px;margin-right: 10px;" />
+						</a>
+					</div>
+					<div id="divChat1" vflex="1" style="width: 300px;background: white;">
+
+					</div>
+				</div>
+			</vlayout>
+			<div style="width: 300px;height: 80px;">
+				<div style="border: 1px solid #d9d9d9;background: white;width: 300px;height: 40px;position: absolute; bottom: 50px;">
+					<textbox id="txtChat" width="240px" height="40px" style="border:0"></textbox>
+					<a>
+						<image src="/img/iconQuestion.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+					</a>
+				</div>
+				<div style="border: 1px solid #d9d9d9;background: white;width: 300px;height: 40px;position: absolute; bottom: 10px;">
+					<a style="width:15px; height:15px; border-radius:15px; border:1px solid;float:left;margin-left:15px;margin-top: 13px "></a>
+					<a style="width:15px; height:15px; border-radius:15px; background:#0064ed;float:left;margin-left:20px;margin-top: 13px "></a>
+					<a>
+						<image src="/img/iconFile.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+					</a>
+					<a>
+						<image src="/img/iconCalenda.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+					</a>
+					<a>
+						<image src="/img/iconShare.png" style="height: 25px;float:right;margin-top: 5px;margin-right: 10px;" />
+					</a>
+					<n:a href="skype:echo123?call">
+						<image src="/img/iconCall.png" style="height: 25px;float:right; margin-top: 5px;margin-right: 10px;" />
+					</n:a>
+				</div>
+			</div>
 
 		</div>
 	</div>
