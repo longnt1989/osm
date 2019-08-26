@@ -17,8 +17,10 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Vlayout;
 
 import com.pt.osm.common.Observer;
 import com.pt.osm.component.ContentLayout;
@@ -34,32 +36,50 @@ public class HomeController extends SelectorComposer<Component> {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Wire
-	private Div parent, divChat, divChat1, divChat2, divChat3;
+	private Div parent, divChat, divChat1, divChat2, divChat3, div1, div2, div3,uiChat3,uiChat2,uiChat1;
 	@Wire
-	private A aBoard, aDevelopment, aData, aDetail;
+	private A aBoard, aDevelopment, aData, aDetail, aNoneTask, aTask;
 	@WireVariable
 	Desktop desktop;
 	@Wire
 	A aCreateReq;
 	@Wire
 	Textbox txtChat;
+	@Wire
+	Label lb1, lb2, lb3;
+	@Wire
+	Vlayout vChat;
 	private GeneralController generalController;
 	private Request request;
 	private String typeView, key, key1, key2, key3;
 	private long linkId = -1;
 	private int type = 0;
+	private ContentLayout center, center1, center2;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		desktop.enableServerPush(true);
+		uiChat2.setVflex(null);
+		uiChat3.setVflex(null);
+		uiChat2.setHeight("40px");
+		uiChat3.setHeight("40px");
 		generalController = loadRequest();
 		aCreateReq.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
 				generalController.createRequest();
 			};
 		});
-//		aData.setVisible(false);
-//		aDetail.setVisible(false);
+
+		aNoneTask.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				loadUINoneTask();
+			};
+		});
+		aTask.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				loadUITask();
+			};
+		});
 		aBoard.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
 				generalController = loadRequest();
@@ -123,26 +143,71 @@ public class HomeController extends SelectorComposer<Component> {
 				txtChat.setValue("");
 			}
 		});
-		txtChat.setCtrlKeys("@1@2@3");
+		txtChat.setCtrlKeys("@1@2@3^1^2^3");
 		txtChat.addEventListener(Events.ON_CTRL_KEY, new EventListener<KeyEvent>() {
 			@Override
 			public void onEvent(KeyEvent event) throws Exception {
 				int keyCode = ((KeyEvent) event).getKeyCode();
-				switch (keyCode) {
-				case 49:
-					key = key1;
-					break;
-				case 50:
-					key = key2;
-					break;
-				case 51:
-					key = key3;
-					break;
+				if (event.isCtrlKey()) {
+					switch (keyCode) {
+					case 49:
+						key = key1;
+						uiChat2.setVflex(null);
+						uiChat3.setVflex(null);
+						uiChat2.setHeight("40px");
+						uiChat3.setHeight("40px");
+						uiChat1.setHeight(null);
+						uiChat1.setVflex("1");
+						divChat1.invalidate();
+						divChat2.invalidate();
+						divChat3.invalidate();
+						vChat.invalidate();
+						break;
+					case 50:
+						key = key2;
+						uiChat1.setVflex(null);
+						uiChat3.setVflex(null);
+						uiChat1.setHeight("40px");
+						uiChat3.setHeight("40px");
+						uiChat2.setHeight(null);
+						uiChat2.setVflex("1");
+						divChat1.invalidate();
+						divChat2.invalidate();
+						divChat3.invalidate();
+						vChat.invalidate();
+						break;
+					case 51:
+						key = key3;
+						uiChat2.setVflex(null);
+						uiChat1.setVflex(null);
+						uiChat2.setHeight("40px");
+						uiChat1.setHeight("40px");
+						uiChat3.setHeight(null);
+						uiChat3.setVflex("1");
+						divChat1.invalidate();
+						divChat2.invalidate();
+						divChat3.invalidate();
+						vChat.invalidate();
+						break;
 
-				default:
-					break;
+					default:
+						break;
+					}
+				} else {
+					if (event.isAltKey()) {
+						switch (keyCode) {
+						case 49:
+							loadUINoneTask();
+							break;
+						case 50:
+							loadUITask();
+							break;
+						default:
+							break;
+						}
+
+					}
 				}
-
 			}
 		});
 
@@ -150,15 +215,15 @@ public class HomeController extends SelectorComposer<Component> {
 		key2 = typeView + String.valueOf(linkId) + String.valueOf(type) + "2";
 		key3 = typeView + String.valueOf(linkId) + String.valueOf(type) + "3";
 		this.key = key1;
-		ContentLayout center = new ContentLayout(key1, linkId, type, typeView);
+		center = new ContentLayout(key1, linkId, type, typeView);
 		center.setParent(divChat1);
 		center.setStyle("width:100%; float:left;height:100%;overflow-y: auto;");
 
-		ContentLayout center1 = new ContentLayout(key2, linkId, type, typeView);
+		center1 = new ContentLayout(key2, linkId, type, typeView);
 		center1.setParent(divChat2);
 		center1.setStyle("width:100%;  float:left;height:100%;overflow-y: auto;");
 
-		ContentLayout center2 = new ContentLayout(key3, linkId, type, typeView);
+		center2 = new ContentLayout(key3, linkId, type, typeView);
 		center2.setParent(divChat3);
 		center2.setStyle("width:100%; float:left;height:100%;overflow-y: auto;");
 	}
@@ -198,6 +263,60 @@ public class HomeController extends SelectorComposer<Component> {
 				"height:45px; margin-top:2px; padding:10px; padding-top:8px; text-decoration:none; margin-left:10px");
 		aDevelopment.setStyle(
 				"background:#c3e1f7;height:45px; margin-top:2px; padding:10px; padding-top:10px; float:right; text-decoration:none; margin-right:20px");
+	}
+
+	private void loadUINoneTask() {
+		aNoneTask.setStyle(
+				"width:15px; height:15px; border-radius:15px;background:#0064ed; border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
+		aTask.setStyle(
+				"width:15px; height:15px; border-radius:15px;border:1px solid; float:left;margin-left:20px;margin-top: 13px ");
+		div1.setStyle("background: #855e42;width: 300px;height: 40px;");
+		div2.setStyle("background: #855e42;width: 300px;height: 40px;");
+		div3.setStyle("background: #855e42;width: 300px;height: 40px;");
+		lb3.setValue("None task 3");
+		lb2.setValue("None task 2");
+		lb1.setValue("None task 1");
+		center.getChildren().clear();
+		center1.getChildren().clear();
+		center2.getChildren().clear();
+		this.key = key1;
+		uiChat2.setVflex(null);
+		uiChat3.setVflex(null);
+		uiChat2.setHeight("40px");
+		uiChat3.setHeight("40px");
+		uiChat1.setHeight(null);
+		uiChat1.setVflex("1");
+		divChat1.invalidate();
+		divChat2.invalidate();
+		divChat3.invalidate();
+		vChat.invalidate();
+	}
+
+	private void loadUITask() {
+		aNoneTask.setStyle(
+				"width:15px; height:15px; border-radius:15px;border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
+		aTask.setStyle(
+				"width:15px; height:15px; border-radius:15px;background:#0064ed;  float:left;margin-left:20px;margin-top: 13px ");
+		div1.setStyle("background: #14852a;width: 300px;height: 40px;");
+		div2.setStyle("background: #14852a;width: 300px;height: 40px;");
+		div3.setStyle("background: #14852a;width: 300px;height: 40px;");
+		lb3.setValue("Static");
+		lb2.setValue("Budget");
+		lb1.setValue("Technic");
+		center.getChildren().clear();
+		center1.getChildren().clear();
+		center2.getChildren().clear();
+		this.key = key1;
+		uiChat2.setVflex(null);
+		uiChat3.setVflex(null);
+		uiChat2.setHeight("40px");
+		uiChat3.setHeight("40px");
+		uiChat1.setHeight(null);
+		uiChat1.setVflex("1");
+		divChat1.invalidate();
+		divChat2.invalidate();
+		divChat3.invalidate();
+		vChat.invalidate();
 	}
 
 }
