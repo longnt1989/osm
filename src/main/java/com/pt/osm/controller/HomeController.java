@@ -36,7 +36,7 @@ public class HomeController extends SelectorComposer<Component> {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Wire
-	private Div parent, divChat, divChat1, divChat2, divChat3, div1, div2, div3,uiChat3,uiChat2,uiChat1;
+	private Div parent, divChat, divChat1, divChat2, divChat3, div1, div2, div3, uiChat3, uiChat2, uiChat1;
 	@Wire
 	private A aBoard, aDevelopment, aData, aDetail, aNoneTask, aTask;
 	@WireVariable
@@ -46,7 +46,7 @@ public class HomeController extends SelectorComposer<Component> {
 	@Wire
 	Textbox txtChat;
 	@Wire
-	Label lb1, lb2, lb3;
+	A lb1, lb2, lb3;
 	@Wire
 	Vlayout vChat;
 	private GeneralController generalController;
@@ -59,10 +59,6 @@ public class HomeController extends SelectorComposer<Component> {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		desktop.enableServerPush(true);
-		uiChat2.setVflex(null);
-		uiChat3.setVflex(null);
-		uiChat2.setHeight("40px");
-		uiChat3.setHeight("40px");
 		generalController = loadRequest();
 		aCreateReq.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
@@ -151,43 +147,13 @@ public class HomeController extends SelectorComposer<Component> {
 				if (event.isCtrlKey()) {
 					switch (keyCode) {
 					case 49:
-						key = key1;
-						uiChat2.setVflex(null);
-						uiChat3.setVflex(null);
-						uiChat2.setHeight("40px");
-						uiChat3.setHeight("40px");
-						uiChat1.setHeight(null);
-						uiChat1.setVflex("1");
-						divChat1.invalidate();
-						divChat2.invalidate();
-						divChat3.invalidate();
-						vChat.invalidate();
+						loadHeader(div1, div2, div3, key1);
 						break;
 					case 50:
-						key = key2;
-						uiChat1.setVflex(null);
-						uiChat3.setVflex(null);
-						uiChat1.setHeight("40px");
-						uiChat3.setHeight("40px");
-						uiChat2.setHeight(null);
-						uiChat2.setVflex("1");
-						divChat1.invalidate();
-						divChat2.invalidate();
-						divChat3.invalidate();
-						vChat.invalidate();
+						loadHeader(div2, div1, div3, key2);
 						break;
 					case 51:
-						key = key3;
-						uiChat2.setVflex(null);
-						uiChat1.setVflex(null);
-						uiChat2.setHeight("40px");
-						uiChat1.setHeight("40px");
-						uiChat3.setHeight(null);
-						uiChat3.setVflex("1");
-						divChat1.invalidate();
-						divChat2.invalidate();
-						divChat3.invalidate();
-						vChat.invalidate();
+						loadHeader(div3, div1, div3, key3);
 						break;
 
 					default:
@@ -208,6 +174,81 @@ public class HomeController extends SelectorComposer<Component> {
 
 					}
 				}
+			}
+		});
+
+		lb1.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				key = key1;
+				uiChat2.setVflex(null);
+				uiChat3.setVflex(null);
+				uiChat2.setHeight("40px");
+				uiChat3.setHeight("40px");
+				uiChat1.setHeight(null);
+				uiChat1.setVflex("1");
+				divChat1.invalidate();
+				divChat2.invalidate();
+				divChat3.invalidate();
+				vChat.invalidate();
+			}
+		});
+
+		lb2.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				key = key2;
+				uiChat1.setVflex(null);
+				uiChat3.setVflex(null);
+				uiChat1.setHeight("40px");
+				uiChat3.setHeight("40px");
+				uiChat2.setHeight(null);
+				uiChat2.setVflex("1");
+				divChat1.invalidate();
+				divChat2.invalidate();
+				divChat3.invalidate();
+				vChat.invalidate();
+			}
+		});
+
+		lb3.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				key = key3;
+				uiChat2.setVflex(null);
+				uiChat1.setVflex(null);
+				uiChat2.setHeight("40px");
+				uiChat1.setHeight("40px");
+				uiChat3.setHeight(null);
+				uiChat3.setVflex("1");
+				divChat1.invalidate();
+				divChat2.invalidate();
+				divChat3.invalidate();
+				vChat.invalidate();
+			}
+		});
+		
+		lb1.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				loadHeader(div1, div2, div3, key1);
+			
+			}
+		});
+
+		lb2.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				loadHeader(div2, div1, div3, key2);
+			
+			}
+		});
+
+		lb3.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				loadHeader(div3, div2, div1, key3);
+				
 			}
 		});
 
@@ -270,20 +311,20 @@ public class HomeController extends SelectorComposer<Component> {
 				"width:15px; height:15px; border-radius:15px;background:#0064ed; border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
 		aTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;border:1px solid; float:left;margin-left:20px;margin-top: 13px ");
-		div1.setStyle("background: #855e42;width: 300px;height: 40px;");
+		div1.setStyle("background: #c4987a;width: 300px;height: 40px;");
 		div2.setStyle("background: #855e42;width: 300px;height: 40px;");
 		div3.setStyle("background: #855e42;width: 300px;height: 40px;");
-		lb3.setValue("None task 3");
-		lb2.setValue("None task 2");
-		lb1.setValue("None task 1");
+		lb3.setLabel("None task 3");
+		lb2.setLabel("None task 2");
+		lb1.setLabel("None task 1");
 		center.getChildren().clear();
 		center1.getChildren().clear();
 		center2.getChildren().clear();
 		this.key = key1;
-		uiChat2.setVflex(null);
-		uiChat3.setVflex(null);
-		uiChat2.setHeight("40px");
-		uiChat3.setHeight("40px");
+		uiChat2.setHeight(null);
+		uiChat2.setVflex("1");
+		uiChat3.setHeight(null);
+		uiChat3.setVflex("1");
 		uiChat1.setHeight(null);
 		uiChat1.setVflex("1");
 		divChat1.invalidate();
@@ -297,26 +338,39 @@ public class HomeController extends SelectorComposer<Component> {
 				"width:15px; height:15px; border-radius:15px;border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
 		aTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;background:#0064ed;  float:left;margin-left:20px;margin-top: 13px ");
-		div1.setStyle("background: #14852a;width: 300px;height: 40px;");
+		div1.setStyle("background: #84bd8f;width: 300px;height: 40px;");
 		div2.setStyle("background: #14852a;width: 300px;height: 40px;");
 		div3.setStyle("background: #14852a;width: 300px;height: 40px;");
-		lb3.setValue("Static");
-		lb2.setValue("Budget");
-		lb1.setValue("Technic");
+		lb3.setLabel("Static");
+		lb2.setLabel("Budget");
+		lb1.setLabel("Technic");
 		center.getChildren().clear();
 		center1.getChildren().clear();
 		center2.getChildren().clear();
 		this.key = key1;
-		uiChat2.setVflex(null);
-		uiChat3.setVflex(null);
-		uiChat2.setHeight("40px");
-		uiChat3.setHeight("40px");
+		uiChat2.setHeight(null);
+		uiChat2.setVflex("1");
+		uiChat3.setHeight(null);
+		uiChat3.setVflex("1");
 		uiChat1.setHeight(null);
 		uiChat1.setVflex("1");
 		divChat1.invalidate();
 		divChat2.invalidate();
 		divChat3.invalidate();
 		vChat.invalidate();
+	}
+
+	private void loadHeader(Div divSelect, Div div2, Div div3, String keySelect) {
+		key = keySelect;
+		if(aTask.getStyle().contains("0064ed")) {
+			divSelect.setStyle("background: #84bd8f;width: 300px;height: 40px;");
+			div2.setStyle("background: #14852a;width: 300px;height: 40px;");
+			div3.setStyle("background: #14852a;width: 300px;height: 40px;");
+		}else {
+			divSelect.setStyle("background: #c4987a;width: 300px;height: 40px;");
+			div2.setStyle("background: #855e42;width: 300px;height: 40px;");
+			div3.setStyle("background: #855e42;width: 300px;height: 40px;");
+		}
 	}
 
 }
