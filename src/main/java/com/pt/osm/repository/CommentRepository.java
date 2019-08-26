@@ -9,5 +9,5 @@ import com.pt.osm.model.Comment;
 
 @Repository("commentRepository")
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-	 List<Comment> findByRequestIdAndTypeAndTypeView(long requestId, int type, String typeView);
+	 List<Comment> findByRequestId(long requestId);
 }

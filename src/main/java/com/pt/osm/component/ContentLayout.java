@@ -20,21 +20,26 @@ import com.pt.osm.model.Comment;
 import com.pt.osm.service.RequestService;
 
 public class ContentLayout extends Vlayout implements IObserver {
-	private String key;
+	private String key = "";
 
 	@Autowired
 	private RequestService requestService;
 
-	public ContentLayout(String key, long linkId, int type, String typeView) {
+	public ContentLayout() {
 		super();
-		this.key = key;
 		requestService = OsmApplication.ctx.getBean(RequestService.class);
-		List<Comment> lst = requestService.findByRequestIdAndTypeAndTypeView(linkId, type, typeView);
+	}
+
+	public void setGroupId(long linkId) {
+		removeEventListener();
+		this.key = String.valueOf(linkId);
+		addEventListener();
+		this.getChildren().clear();
+		List<Comment> lst = requestService.findByLinkId(linkId);
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		for (Comment comment : lst) {
 			loadComment(df, comment);
 		}
-		addEventListener();
 	}
 
 	@Override

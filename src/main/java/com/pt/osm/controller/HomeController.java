@@ -1,9 +1,12 @@
 package com.pt.osm.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Executions;
@@ -15,19 +18,30 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.A;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Panel;
+import org.zkoss.zul.Popup;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vlayout;
 
+import com.pt.osm.OsmApplication;
 import com.pt.osm.common.Observer;
 import com.pt.osm.component.ContentLayout;
-import com.pt.osm.component.DivChat;
 import com.pt.osm.model.Comment;
+import com.pt.osm.model.GroupChat;
+import com.pt.osm.model.MapChat;
 import com.pt.osm.model.Request;
 import com.pt.osm.model.User;
+import com.pt.osm.service.RequestService;
+import com.pt.osm.service.UserService;
 
 public class HomeController extends SelectorComposer<Component> {
 
@@ -46,19 +60,34 @@ public class HomeController extends SelectorComposer<Component> {
 	@Wire
 	Textbox txtChat;
 	@Wire
-	A lb1, lb2, lb3;
+	Combobox cboGroupChat;
+	@Wire
+	A lb1, lb2, lb3, aAddGroup, aDelete3, aDelete2, aDelete1;
 	@Wire
 	Vlayout vChat;
+	@Wire
+	Image imgAdd;
 	private GeneralController generalController;
 	private Request request;
-	private String typeView, key, key1, key2, key3;
+	private String typeView = "", key, key1, key2, key3;
 	private long linkId = -1;
 	private int type = 0;
 	private ContentLayout center, center1, center2;
+	private User user;
+	private UserService userService;
+	private RequestService requestService;
+	private List<GroupChat> lstChat;
 
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		desktop.enableServerPush(true);
+		userService = OsmApplication.ctx.getBean(UserService.class);
+		user = (User) Executions.getCurrent().getSession().getAttribute("user");
+		requestService = OsmApplication.ctx.getBean(RequestService.class);
+		if (user == null) {
+			Executions.sendRedirect("/");
+		}
+		lstChat = new ArrayList<GroupChat>();
 		generalController = loadRequest();
 		aCreateReq.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
@@ -69,6 +98,33 @@ public class HomeController extends SelectorComposer<Component> {
 		aNoneTask.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
 				loadUINoneTask();
+			};
+		});
+		aDelete1.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				try {
+					requestService.deleteGroupChat(lstChat.get(0));
+				} catch (Exception e) {
+				}
+				loadUIChatNT();
+			};
+		});
+		aDelete2.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				try {
+					requestService.deleteGroupChat(lstChat.get(1));
+				} catch (Exception e) {
+				}
+				loadUIChatNT();
+			};
+		});
+		aDelete3.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				try {
+					requestService.deleteGroupChat(lstChat.get(2));
+				} catch (Exception e) {
+				}
+				loadUIChatNT();
 			};
 		});
 		aTask.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
@@ -118,7 +174,6 @@ public class HomeController extends SelectorComposer<Component> {
 						"width:15px; height:15px; border-radius:15px; border:1px solid;float:right;margin-right:15px;margin-top: 15px ");
 			};
 		});
-		typeView = DivChat.View_Request;
 		txtChat.setPlaceholder("Chat here");
 		txtChat.addEventListener(Events.ON_OK, new EventListener<Event>() {
 			@Override
@@ -126,7 +181,7 @@ public class HomeController extends SelectorComposer<Component> {
 				String chat = txtChat.getValue();
 				Comment comment = new Comment();
 				comment.setContent(chat);
-				comment.setName("Long");
+				comment.setName(user.toString());
 				comment.setTypeView(typeView);
 				comment.setRequestId(linkId);
 				comment.setType(type);
@@ -153,7 +208,7 @@ public class HomeController extends SelectorComposer<Component> {
 						loadHeader(div2, div1, div3, key2);
 						break;
 					case 51:
-						loadHeader(div3, div1, div3, key3);
+						loadHeader(div3, div1, div2, key3);
 						break;
 
 					default:
@@ -227,12 +282,12 @@ public class HomeController extends SelectorComposer<Component> {
 				vChat.invalidate();
 			}
 		});
-		
+
 		lb1.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				loadHeader(div1, div2, div3, key1);
-			
+
 			}
 		});
 
@@ -240,7 +295,7 @@ public class HomeController extends SelectorComposer<Component> {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				loadHeader(div2, div1, div3, key2);
-			
+
 			}
 		});
 
@@ -248,30 +303,99 @@ public class HomeController extends SelectorComposer<Component> {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
 				loadHeader(div3, div2, div1, key3);
-				
+
 			}
 		});
 
-		key1 = typeView + String.valueOf(linkId) + String.valueOf(type) + "1";
-		key2 = typeView + String.valueOf(linkId) + String.valueOf(type) + "2";
-		key3 = typeView + String.valueOf(linkId) + String.valueOf(type) + "3";
 		this.key = key1;
-		center = new ContentLayout(key1, linkId, type, typeView);
+		center = new ContentLayout();
 		center.setParent(divChat1);
 		center.setStyle("width:100%; float:left;height:100%;overflow-y: auto;");
 
-		center1 = new ContentLayout(key2, linkId, type, typeView);
+		center1 = new ContentLayout();
 		center1.setParent(divChat2);
 		center1.setStyle("width:100%;  float:left;height:100%;overflow-y: auto;");
 
-		center2 = new ContentLayout(key3, linkId, type, typeView);
+		center2 = new ContentLayout();
 		center2.setParent(divChat3);
 		center2.setStyle("width:100%; float:left;height:100%;overflow-y: auto;");
+
+		loadUINoneTask();
+
+		aAddGroup.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				Popup popup = new Popup();
+				popup.setParent(parent);
+				popup.setWidth("300px");
+				popup.setHeight("420px");
+				popup.setStyle("border:1px solid #14852a");
+				Textbox txtName = new Textbox();
+				txtName.setParent(popup);
+				txtName.setPlaceholder("Type name of the chat");
+				txtName.setStyle("float:left; width:100%");
+				Label lb = new Label("Members");
+				lb.setStyle("float:left; width:100%;margin-top: 10px;");
+				lb.setParent(popup);
+				Listbox listbox = new Listbox();
+				listbox.setStyle("float:left; width:100%; height:230px; margin-top:10px");
+				listbox.setParent(popup);
+				Combobox combobox = new Combobox();
+				combobox.setPlaceholder("Add member");
+				combobox.setAutodrop(true);
+				combobox.setButtonVisible(false);
+				combobox.setStyle("float:left; width:100%; margin-top:10px");
+				combobox.setParent(popup);
+				List<User> lstUsers = userService.findAll();
+				combobox.setModel(new ListModelList<User>(lstUsers));
+				combobox.addEventListener(Events.ON_OK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {
+						if (combobox.getSelectedItem() != null) {
+							User user = combobox.getSelectedItem().getValue();
+							Listitem listitem = new Listitem(user.toString(), user.getId());
+							listitem.setParent(listbox);
+							combobox.setSelectedItem(null);
+						}
+
+					}
+				});
+				Button btn = new Button("Save");
+				btn.setStyle("float:right; margin-top:10px");
+				btn.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+					@Override
+					public void onEvent(Event arg0) throws Exception {
+						GroupChat groupChat = new GroupChat();
+						groupChat.setName(txtName.getValue());
+						groupChat.setTime(new Date());
+						if (aNoneTask.getStyle().contains("0064ed")) {
+							groupChat.setType(0);
+						} else {
+							groupChat.setType(1);
+						}
+
+						groupChat = requestService.saveGroupChat(groupChat);
+						for (int i = 0; i < listbox.getItemCount(); i++) {
+							Listitem itListitem = listbox.getItemAtIndex(i);
+							long idUser = itListitem.getValue();
+							MapChat mapChat = new MapChat();
+							mapChat.setGroupId(groupChat.getId());
+							mapChat.setUserId(idUser);
+							requestService.saveMapChat(mapChat);
+						}
+						loadUIChatNT();
+						popup.close();
+					}
+				});
+				btn.setParent(popup);
+				popup.open(aAddGroup, "start_before");
+			};
+		});
+
 	}
 
 	private GeneralController loadRequest() {
 		parent.getChildren().clear();
-		User user = (User) Executions.getCurrent().getSession().getAttribute("user");
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		Panel general = (Panel) Executions.createComponents("~./zul/general.zul", null, params);
 		general.setParent(parent);
@@ -279,8 +403,6 @@ public class HomeController extends SelectorComposer<Component> {
 		Include curren = new Include("~./zul/currenttask.zul");
 		curren.setParent(parent);
 		GeneralController generalController = ((GeneralController) general.getAttribute("GeneralController"));
-//		DivChat divChatG = new DivChat(-1, DivChat.View_Request, 0);
-//		divChatG.setParent(divChat);
 		generalController.setHome(this);
 		aDetail.setStyle(
 				"width:15px; height:15px; border-radius:15px; background:#0064ed;float:right;margin-right:15px;margin-top: 15px ");
@@ -306,7 +428,64 @@ public class HomeController extends SelectorComposer<Component> {
 				"background:#c3e1f7;height:45px; margin-top:2px; padding:10px; padding-top:10px; float:right; text-decoration:none; margin-right:20px");
 	}
 
+	private void loadUIChat(int type) {
+		lstChat = requestService.findByTypeAndLinkId(type, 0);
+		cboGroupChat.setModel(new ListModelList<GroupChat>(lstChat));
+		System.out.println(lstChat);
+		switch (lstChat.size()) {
+		case 0:
+			uiChat1.setVisible(false);
+			uiChat2.setVisible(false);
+			uiChat3.setVisible(false);
+
+			break;
+		case 1:
+			uiChat2.setVisible(false);
+			uiChat3.setVisible(false);
+			uiChat1.setVisible(true);
+			lb1.setLabel(lstChat.get(0).getName());
+			key1 = String.valueOf(lstChat.get(0).getId());
+			center.setGroupId(lstChat.get(0).getId());
+			break;
+		case 2:
+			uiChat3.setVisible(false);
+			uiChat1.setVisible(true);
+			uiChat2.setVisible(true);
+			lb1.setLabel(lstChat.get(0).getName());
+			lb2.setLabel(lstChat.get(1).getName());
+			key1 = String.valueOf(lstChat.get(0).getId());
+			key2 = String.valueOf(lstChat.get(1).getId());
+			center.setGroupId(lstChat.get(0).getId());
+			center1.setGroupId(lstChat.get(1).getId());
+			break;
+		default:
+			uiChat3.setVisible(true);
+			uiChat1.setVisible(true);
+			uiChat2.setVisible(true);
+			lb1.setLabel(lstChat.get(0).getName());
+			lb2.setLabel(lstChat.get(1).getName());
+			lb3.setLabel(lstChat.get(2).getName());
+			key1 = String.valueOf(lstChat.get(0).getId());
+			key2 = String.valueOf(lstChat.get(1).getId());
+			center.setGroupId(lstChat.get(0).getId());
+			center1.setGroupId(lstChat.get(1).getId());
+			key3 = String.valueOf(lstChat.get(2).getId());
+			center2.setGroupId(lstChat.get(2).getId());
+			break;
+		}
+	}
+
+	private void loadUIChatNT() {
+		if (aNoneTask.getStyle().contains("0064ed")) {
+			loadUINoneTask();
+		} else {
+			loadUITask();
+		}
+	}
+
 	private void loadUINoneTask() {
+		loadUIChat(0);
+		imgAdd.setSrc("/img/iconGroupAddN.png");
 		aNoneTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;background:#0064ed; border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
 		aTask.setStyle(
@@ -314,9 +493,6 @@ public class HomeController extends SelectorComposer<Component> {
 		div1.setStyle("background: #c4987a;width: 300px;height: 40px;");
 		div2.setStyle("background: #855e42;width: 300px;height: 40px;");
 		div3.setStyle("background: #855e42;width: 300px;height: 40px;");
-		lb3.setLabel("None task 3");
-		lb2.setLabel("None task 2");
-		lb1.setLabel("None task 1");
 		center.getChildren().clear();
 		center1.getChildren().clear();
 		center2.getChildren().clear();
@@ -334,6 +510,8 @@ public class HomeController extends SelectorComposer<Component> {
 	}
 
 	private void loadUITask() {
+		loadUIChat(1);
+		imgAdd.setSrc("/img/iconGroupAddT.png");
 		aNoneTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
 		aTask.setStyle(
@@ -341,9 +519,6 @@ public class HomeController extends SelectorComposer<Component> {
 		div1.setStyle("background: #84bd8f;width: 300px;height: 40px;");
 		div2.setStyle("background: #14852a;width: 300px;height: 40px;");
 		div3.setStyle("background: #14852a;width: 300px;height: 40px;");
-		lb3.setLabel("Static");
-		lb2.setLabel("Budget");
-		lb1.setLabel("Technic");
 		center.getChildren().clear();
 		center1.getChildren().clear();
 		center2.getChildren().clear();
@@ -362,11 +537,11 @@ public class HomeController extends SelectorComposer<Component> {
 
 	private void loadHeader(Div divSelect, Div div2, Div div3, String keySelect) {
 		key = keySelect;
-		if(aTask.getStyle().contains("0064ed")) {
+		if (aTask.getStyle().contains("0064ed")) {
 			divSelect.setStyle("background: #84bd8f;width: 300px;height: 40px;");
 			div2.setStyle("background: #14852a;width: 300px;height: 40px;");
 			div3.setStyle("background: #14852a;width: 300px;height: 40px;");
-		}else {
+		} else {
 			divSelect.setStyle("background: #c4987a;width: 300px;height: 40px;");
 			div2.setStyle("background: #855e42;width: 300px;height: 40px;");
 			div3.setStyle("background: #855e42;width: 300px;height: 40px;");

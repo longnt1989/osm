@@ -11,27 +11,17 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.A;
-import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Rows;
-import org.zkoss.zul.SimpleListModel;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Vlayout;
 
 import com.pt.osm.OsmApplication;
-import com.pt.osm.component.DivChat;
 import com.pt.osm.model.Request;
-import com.pt.osm.model.User;
 import com.pt.osm.service.RequestService;
-import com.pt.osm.service.UserService;
 
 public class GeneralController extends SelectorComposer<Component> {
 

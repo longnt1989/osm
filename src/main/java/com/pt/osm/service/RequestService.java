@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pt.osm.model.Budget;
 import com.pt.osm.model.Comment;
 import com.pt.osm.model.DataOffer;
 import com.pt.osm.model.DataRequest;
+import com.pt.osm.model.GroupChat;
+import com.pt.osm.model.MapChat;
 import com.pt.osm.model.Offer;
 import com.pt.osm.model.Payment;
 import com.pt.osm.model.Request;
@@ -16,6 +19,8 @@ import com.pt.osm.repository.BudgetRepository;
 import com.pt.osm.repository.CommentRepository;
 import com.pt.osm.repository.DataOfferRepository;
 import com.pt.osm.repository.DataRequestRepository;
+import com.pt.osm.repository.GroupChatRepository;
+import com.pt.osm.repository.MapChatRepository;
 import com.pt.osm.repository.OfferRepository;
 import com.pt.osm.repository.PaymentRepository;
 import com.pt.osm.repository.RequestRepository;
@@ -37,12 +42,18 @@ public class RequestService {
 
 	@Autowired
 	OfferRepository offerRepository;
-	
+
 	@Autowired
 	DataOfferRepository dataOfferRepository;
-	
+
 	@Autowired
 	PaymentRepository paymentRepository;
+
+	@Autowired
+	GroupChatRepository groupChatRepository;
+
+	@Autowired
+	MapChatRepository mapChatRepository;
 
 	public Request saveRequest(Request request) {
 		return requestRepository.save(request);
@@ -84,8 +95,8 @@ public class RequestService {
 		return commentRepository.save(comment);
 	}
 
-	public List<Comment> findByRequestIdAndTypeAndTypeView(long requestId, int type, String typeView) {
-		return commentRepository.findByRequestIdAndTypeAndTypeView(requestId, type, typeView);
+	public List<Comment> findByLinkId(long requestId) {
+		return commentRepository.findByRequestId(requestId);
 	}
 
 	public Offer findByRequestId(long requestId) {
@@ -95,25 +106,63 @@ public class RequestService {
 	public Offer saveOffer(Offer offer) {
 		return offerRepository.save(offer);
 	}
-	
+
 	public DataOffer saveDataOffer(DataOffer dataOffer) {
 		return dataOfferRepository.save(dataOffer);
 	}
-	
+
 	public void deleteDataOffer(DataOffer dataOffer) {
 		dataOfferRepository.delete(dataOffer);
 	}
-	
+
 	public Payment savePayment(Payment payment) {
 		return paymentRepository.save(payment);
 	}
-	
+
 	public List<DataOffer> findAllDataOffer(Request offer) {
 		return dataOfferRepository.findByOfferId(offer.getId());
 	}
-	
+
 	public List<Payment> findAllPayment(Offer offer) {
 		return paymentRepository.findByOfferId(offer.getId());
+	}
+
+	@Transactional
+	public GroupChat saveGroupChat(GroupChat groupChat) {
+		return groupChatRepository.save(groupChat);
+	}
+	
+	@Transactional
+	public GroupChat getGroupChatById(long idGroupChat) {
+		return groupChatRepository.getOne(idGroupChat);
+	}
+
+	@Transactional
+	public List<GroupChat> findGroupByLinkId(long linkId) {
+		return groupChatRepository.findByLinkId(linkId);
+	}
+	
+	@Transactional
+	public List<GroupChat> findByTypeAndLinkId(int type,long linkId) {
+		return groupChatRepository.findByTypeAndLinkId(type, linkId);
+	}
+
+	@Transactional
+	public MapChat saveMapChat(MapChat groupChat) {
+		return mapChatRepository.save(groupChat);
+	}
+
+	@Transactional
+	public List<MapChat> findByUserId(long userId) {
+		return mapChatRepository.findByUserId(userId);
+	}
+	@Transactional
+	public void deleteGroupChat(GroupChat groupChat) {
+		List<MapChat> lst = mapChatRepository.findByGroupId(groupChat.getId());
+		for (MapChat mapChat : lst) {
+			mapChatRepository.delete(mapChat);
+		}
+		groupChatRepository.delete(groupChat);
 	}
 
 }

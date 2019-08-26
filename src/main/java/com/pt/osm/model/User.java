@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Table(name = "user")
 @Data
 @NoArgsConstructor
-@ToString
 @AllArgsConstructor
 public class User implements Serializable {
 
@@ -107,5 +106,12 @@ public class User implements Serializable {
             throw new IllegalArgumentException("No matching constant for [" + status + "]");
         }
     }
+
+	@Override
+	public String toString() {
+		return firstName  +" "+ lastName ;
+	}
+    
+    
 
 }
