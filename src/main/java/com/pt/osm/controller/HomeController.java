@@ -1,6 +1,9 @@
 package com.pt.osm.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Panel;
 import org.zkoss.zul.Popup;
@@ -62,7 +66,7 @@ public class HomeController extends SelectorComposer<Component> {
 	@Wire
 	Combobox cboGroupChat;
 	@Wire
-	A lb1, lb2, lb3, aAddGroup, aDelete3, aDelete2, aDelete1;
+	A lb1, lb2, lb3, aAddGroup, aDelete3, aDelete2, aDelete1, aAddMem1, aAddMem2, aAddMem3;
 	@Wire
 	Vlayout vChat;
 	@Wire
@@ -70,7 +74,6 @@ public class HomeController extends SelectorComposer<Component> {
 	private GeneralController generalController;
 	private Request request;
 	private String typeView = "", key, key1, key2, key3;
-	private long linkId = -1;
 	private int type = 0;
 	private ContentLayout center, center1, center2;
 	private User user;
@@ -97,6 +100,7 @@ public class HomeController extends SelectorComposer<Component> {
 
 		aNoneTask.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
+				key = key1;
 				loadUINoneTask();
 			};
 		});
@@ -129,6 +133,7 @@ public class HomeController extends SelectorComposer<Component> {
 		});
 		aTask.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
 			public void onEvent(Event arg0) throws Exception {
+				key = key1;
 				loadUITask();
 			};
 		});
@@ -183,12 +188,22 @@ public class HomeController extends SelectorComposer<Component> {
 				comment.setContent(chat);
 				comment.setName(user.toString());
 				comment.setTypeView(typeView);
+				long linkId = -1;
+				if (key.equals(key1)) {
+					linkId = lstChat.get(0).getId();
+				} else {
+					if (key.equals(key2)) {
+						linkId = lstChat.get(1).getId();
+					} else {
+						if (key.equals(key3)) {
+							linkId = lstChat.get(2).getId();
+						}
+					}
+				}
 				comment.setRequestId(linkId);
 				comment.setType(type);
 				comment.setCreateDate(new Date());
-//				if (linkId != -1) {
-//					comment = requestService.saveComment(comment);
-//				}
+				comment = requestService.saveComment(comment);
 
 				Observer.fireChatEvent(key, comment);
 				txtChat.setValue("");
@@ -235,51 +250,37 @@ public class HomeController extends SelectorComposer<Component> {
 		lb1.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				key = key1;
-				uiChat2.setVflex(null);
-				uiChat3.setVflex(null);
-				uiChat2.setHeight("40px");
-				uiChat3.setHeight("40px");
-				uiChat1.setHeight(null);
-				uiChat1.setVflex("1");
-				divChat1.invalidate();
-				divChat2.invalidate();
-				divChat3.invalidate();
-				vChat.invalidate();
+				if (uiChat1.getVflex() == null
+						|| (uiChat1.getVflex() != null && uiChat2.getVflex() != null && uiChat3.getVflex() != null)) {
+					fullChat1();
+				} else {
+					fullChat();
+				}
+
 			}
 		});
 
 		lb2.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				key = key2;
-				uiChat1.setVflex(null);
-				uiChat3.setVflex(null);
-				uiChat1.setHeight("40px");
-				uiChat3.setHeight("40px");
-				uiChat2.setHeight(null);
-				uiChat2.setVflex("1");
-				divChat1.invalidate();
-				divChat2.invalidate();
-				divChat3.invalidate();
-				vChat.invalidate();
+				if (uiChat2.getVflex() == null
+						|| (uiChat1.getVflex() != null && uiChat2.getVflex() != null && uiChat3.getVflex() != null)) {
+					fullChat2();
+				} else {
+					fullChat();
+				}
 			}
 		});
 
 		lb3.addEventListener(Events.ON_DOUBLE_CLICK, new EventListener<Event>() {
 			@Override
 			public void onEvent(Event arg0) throws Exception {
-				key = key3;
-				uiChat2.setVflex(null);
-				uiChat1.setVflex(null);
-				uiChat2.setHeight("40px");
-				uiChat1.setHeight("40px");
-				uiChat3.setHeight(null);
-				uiChat3.setVflex("1");
-				divChat1.invalidate();
-				divChat2.invalidate();
-				divChat3.invalidate();
-				vChat.invalidate();
+				if (uiChat3.getVflex() == null
+						|| (uiChat1.getVflex() != null && uiChat2.getVflex() != null && uiChat3.getVflex() != null)) {
+					fullChat3();
+				} else {
+					fullChat();
+				}
 			}
 		});
 
@@ -307,7 +308,7 @@ public class HomeController extends SelectorComposer<Component> {
 			}
 		});
 
-		this.key = key1;
+		
 		center = new ContentLayout();
 		center.setParent(divChat1);
 		center.setStyle("width:100%; float:left;height:100%;overflow-y: auto;");
@@ -339,6 +340,8 @@ public class HomeController extends SelectorComposer<Component> {
 				Listbox listbox = new Listbox();
 				listbox.setStyle("float:left; width:100%; height:230px; margin-top:10px");
 				listbox.setParent(popup);
+				Listitem listitem = new Listitem(user.toString(), user.getId());
+				listitem.setParent(listbox);
 				Combobox combobox = new Combobox();
 				combobox.setPlaceholder("Add member");
 				combobox.setAutodrop(true);
@@ -352,8 +355,18 @@ public class HomeController extends SelectorComposer<Component> {
 					public void onEvent(Event arg0) throws Exception {
 						if (combobox.getSelectedItem() != null) {
 							User user = combobox.getSelectedItem().getValue();
-							Listitem listitem = new Listitem(user.toString(), user.getId());
-							listitem.setParent(listbox);
+							boolean add = true;
+							for (int i = 0; i < listbox.getItemCount(); i++) {
+								Listitem itListitem = listbox.getItemAtIndex(i);
+								long idUser = itListitem.getValue();
+								if (idUser == user.getId()) {
+									add = false;
+								}
+							}
+							if (add) {
+								Listitem listitem = new Listitem(user.toString(), user.getId());
+								listitem.setParent(listbox);
+							}
 							combobox.setSelectedItem(null);
 						}
 
@@ -372,7 +385,7 @@ public class HomeController extends SelectorComposer<Component> {
 						} else {
 							groupChat.setType(1);
 						}
-
+						groupChat.setIndexChat(1);
 						groupChat = requestService.saveGroupChat(groupChat);
 						for (int i = 0; i < listbox.getItemCount(); i++) {
 							Listitem itListitem = listbox.getItemAtIndex(i);
@@ -382,6 +395,22 @@ public class HomeController extends SelectorComposer<Component> {
 							mapChat.setUserId(idUser);
 							requestService.saveMapChat(mapChat);
 						}
+						for (GroupChat gc : lstChat) {
+							if (gc.getIndexChat() == 1) {
+								gc.setIndexChat(2);
+								requestService.saveGroupChat(gc);
+							} else {
+								if (gc.getIndexChat() == 2) {
+									gc.setIndexChat(3);
+									requestService.saveGroupChat(gc);
+								} else {
+									if (gc.getIndexChat() == 3) {
+										gc.setIndexChat(-1);
+										requestService.saveGroupChat(gc);
+									}
+								}
+							}
+						}
 						loadUIChatNT();
 						popup.close();
 					}
@@ -389,6 +418,52 @@ public class HomeController extends SelectorComposer<Component> {
 				btn.setParent(popup);
 				popup.open(aAddGroup, "start_before");
 			};
+		});
+
+		aAddMem1.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				popupAddMem(lstChat.get(0), divChat1);
+			};
+		});
+		aAddMem2.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				popupAddMem(lstChat.get(1), divChat2);
+			};
+		});
+
+		aAddMem3.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+			public void onEvent(Event arg0) throws Exception {
+				popupAddMem(lstChat.get(2), divChat3);
+			};
+		});
+
+		cboGroupChat.addEventListener(Events.ON_CHANGE, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				GroupChat groupChat = cboGroupChat.getSelectedItem().getValue();
+				if (groupChat != null) {
+					groupChat.setIndexChat(1);
+					requestService.saveGroupChat(groupChat);
+					for (GroupChat gc : lstChat) {
+						if (gc.getIndexChat() == 1) {
+							gc.setIndexChat(2);
+							requestService.saveGroupChat(gc);
+						} else {
+							if (gc.getIndexChat() == 2) {
+								gc.setIndexChat(3);
+								requestService.saveGroupChat(gc);
+							} else {
+								if (gc.getIndexChat() == 3) {
+									gc.setIndexChat(-1);
+									requestService.saveGroupChat(gc);
+								}
+							}
+						}
+					}
+					loadUIChatNT();
+				}
+
+			}
 		});
 
 	}
@@ -429,9 +504,30 @@ public class HomeController extends SelectorComposer<Component> {
 	}
 
 	private void loadUIChat(int type) {
-		lstChat = requestService.findByTypeAndLinkId(type, 0);
-		cboGroupChat.setModel(new ListModelList<GroupChat>(lstChat));
-		System.out.println(lstChat);
+		List<GroupChat> lst = requestService.findByTypeAndLinkId(type, 0);
+		lstChat = new ArrayList<GroupChat>();
+		for (int i = 0; i < lst.size();) {
+			if (lst.get(i).getIndexChat() > 0) {
+				lstChat.add(lst.get(i));
+				lst.remove(i);
+			} else {
+				i++;
+			}
+		}
+		Collections.sort(lstChat, new Comparator<GroupChat>() {
+
+			@Override
+			public int compare(GroupChat arg0, GroupChat arg1) {
+				if (arg0.getIndexChat() > arg1.getIndexChat()) {
+					return 1;
+				} else {
+					return -1;
+				}
+			}
+
+		});
+		cboGroupChat.setModel(new ListModelList<GroupChat>(lst));
+
 		switch (lstChat.size()) {
 		case 0:
 			uiChat1.setVisible(false);
@@ -471,6 +567,7 @@ public class HomeController extends SelectorComposer<Component> {
 			center1.setGroupId(lstChat.get(1).getId());
 			key3 = String.valueOf(lstChat.get(2).getId());
 			center2.setGroupId(lstChat.get(2).getId());
+			this.key = key1;
 			break;
 		}
 	}
@@ -484,7 +581,7 @@ public class HomeController extends SelectorComposer<Component> {
 	}
 
 	private void loadUINoneTask() {
-		loadUIChat(0);
+		
 		imgAdd.setSrc("/img/iconGroupAddN.png");
 		aNoneTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;background:#0064ed; border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
@@ -496,21 +593,12 @@ public class HomeController extends SelectorComposer<Component> {
 		center.getChildren().clear();
 		center1.getChildren().clear();
 		center2.getChildren().clear();
-		this.key = key1;
-		uiChat2.setHeight(null);
-		uiChat2.setVflex("1");
-		uiChat3.setHeight(null);
-		uiChat3.setVflex("1");
-		uiChat1.setHeight(null);
-		uiChat1.setVflex("1");
-		divChat1.invalidate();
-		divChat2.invalidate();
-		divChat3.invalidate();
-		vChat.invalidate();
+		fullChat();
+		loadUIChat(0);
 	}
 
 	private void loadUITask() {
-		loadUIChat(1);
+		
 		imgAdd.setSrc("/img/iconGroupAddT.png");
 		aNoneTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
@@ -523,6 +611,11 @@ public class HomeController extends SelectorComposer<Component> {
 		center1.getChildren().clear();
 		center2.getChildren().clear();
 		this.key = key1;
+		fullChat();
+		loadUIChat(1);
+	}
+
+	private void fullChat() {
 		uiChat2.setHeight(null);
 		uiChat2.setVflex("1");
 		uiChat3.setHeight(null);
@@ -546,6 +639,124 @@ public class HomeController extends SelectorComposer<Component> {
 			div2.setStyle("background: #855e42;width: 300px;height: 40px;");
 			div3.setStyle("background: #855e42;width: 300px;height: 40px;");
 		}
+		if (key.equals(key1) && (uiChat2.getHeight() != null || uiChat3.getHeight() != null)) {
+			fullChat1();
+		}
+		if (key.equals(key2) && (uiChat1.getHeight() != null || uiChat3.getHeight() != null)) {
+			fullChat2();
+		}
+		if (key.equals(key3) && (uiChat2.getHeight() != null || uiChat1.getHeight() != null)) {
+			fullChat3();
+		}
+	}
+
+	private void popupAddMem(GroupChat groupChat, Div div) {
+		Popup popup = new Popup();
+		popup.setParent(parent);
+		popup.setWidth("300px");
+		popup.setHeight("250px");
+		popup.setStyle("border:1px solid #14852a");
+		Combobox combobox = new Combobox();
+		combobox.setPlaceholder("Add member");
+		combobox.setAutodrop(true);
+		combobox.setButtonVisible(false);
+		combobox.setStyle("float:left; width:100%;");
+		combobox.setParent(popup);
+		Listbox listbox = new Listbox();
+		listbox.setStyle("float:left; width:100%; height:190px;");
+		listbox.setParent(popup);
+		List<MapChat> mapChats = requestService.findByGroupId(groupChat.getId());
+		for (MapChat mc : mapChats) {
+			User user = userService.findById(mc.getUserId());
+			Listitem listitem = new Listitem();
+			listitem.setValue(user.getId());
+			Listcell listcell = new Listcell(user.toString());
+			listcell.setParent(listitem);
+			Image img = new Image("/img/delete.png");
+			img.setParent(listcell);
+			img.setStyle("float:right");
+			listitem.setParent(listbox);
+			img.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
+				@Override
+				public void onEvent(Event arg0) throws Exception {
+					requestService.deleteMapChat(mc);
+					listbox.removeChild(listitem);
+				}
+			});
+		}
+
+		List<User> lstUsers = userService.findAll();
+		combobox.setModel(new ListModelList<User>(lstUsers));
+		combobox.addEventListener(Events.ON_OK, new EventListener<Event>() {
+			@Override
+			public void onEvent(Event arg0) throws Exception {
+				if (combobox.getSelectedItem() != null) {
+					User user = combobox.getSelectedItem().getValue();
+					boolean add = true;
+					for (int i = 0; i < listbox.getItemCount(); i++) {
+						Listitem itListitem = listbox.getItemAtIndex(i);
+						long idUser = itListitem.getValue();
+						if (idUser == user.getId()) {
+							add = false;
+						}
+					}
+					if (add) {
+						MapChat mapChat = new MapChat();
+						mapChat.setGroupId(groupChat.getId());
+						mapChat.setUserId(user.getId());
+						requestService.saveMapChat(mapChat);
+						Listitem listitem = new Listitem(user.toString(), user.getId());
+						listitem.setParent(listbox);
+					}
+					combobox.setSelectedItem(null);
+				}
+
+			}
+		});
+
+		popup.open(div, "overlap_end");
+	}
+
+	private void fullChat1() {
+		key = key1;
+		uiChat2.setVflex(null);
+		uiChat3.setVflex(null);
+		uiChat2.setHeight("40px");
+		uiChat3.setHeight("40px");
+		uiChat1.setHeight(null);
+		uiChat1.setVflex("1");
+		divChat1.invalidate();
+		divChat2.invalidate();
+		divChat3.invalidate();
+		vChat.invalidate();
+	}
+
+	private void fullChat2() {
+		key = key2;
+		uiChat1.setVflex(null);
+		uiChat3.setVflex(null);
+		uiChat1.setHeight("40px");
+		uiChat3.setHeight("40px");
+		uiChat2.setHeight(null);
+		uiChat2.setVflex("1");
+		divChat1.invalidate();
+		divChat2.invalidate();
+		divChat3.invalidate();
+		vChat.invalidate();
+	}
+
+	private void fullChat3() {
+		key = key3;
+		uiChat2.setVflex(null);
+		uiChat1.setVflex(null);
+		uiChat2.setHeight("40px");
+		uiChat1.setHeight("40px");
+		uiChat3.setHeight(null);
+		uiChat3.setVflex("1");
+		divChat1.invalidate();
+		divChat2.invalidate();
+		divChat3.invalidate();
+		vChat.invalidate();
 	}
 
 }

@@ -25,6 +25,7 @@ public class GroupChat {
 	private String name;
 	private Date time;
 	private long linkId;
+	private int indexChat;
 	@Override
 	public String toString() {
 		return  name;

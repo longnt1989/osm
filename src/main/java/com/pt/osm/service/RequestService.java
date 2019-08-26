@@ -131,7 +131,7 @@ public class RequestService {
 	public GroupChat saveGroupChat(GroupChat groupChat) {
 		return groupChatRepository.save(groupChat);
 	}
-	
+
 	@Transactional
 	public GroupChat getGroupChatById(long idGroupChat) {
 		return groupChatRepository.getOne(idGroupChat);
@@ -141,9 +141,9 @@ public class RequestService {
 	public List<GroupChat> findGroupByLinkId(long linkId) {
 		return groupChatRepository.findByLinkId(linkId);
 	}
-	
+
 	@Transactional
-	public List<GroupChat> findByTypeAndLinkId(int type,long linkId) {
+	public List<GroupChat> findByTypeAndLinkId(int type, long linkId) {
 		return groupChatRepository.findByTypeAndLinkId(type, linkId);
 	}
 
@@ -153,14 +153,29 @@ public class RequestService {
 	}
 
 	@Transactional
+	public void deleteMapChat(MapChat groupChat) {
+		mapChatRepository.delete(groupChat);
+	}
+
+	@Transactional
 	public List<MapChat> findByUserId(long userId) {
 		return mapChatRepository.findByUserId(userId);
 	}
+
+	@Transactional
+	public List<MapChat> findByGroupId(long groupId) {
+		return mapChatRepository.findByGroupId(groupId);
+	}
+
 	@Transactional
 	public void deleteGroupChat(GroupChat groupChat) {
 		List<MapChat> lst = mapChatRepository.findByGroupId(groupChat.getId());
 		for (MapChat mapChat : lst) {
 			mapChatRepository.delete(mapChat);
+		}
+		List<Comment> comments = commentRepository.findByRequestId(groupChat.getId());
+		for (Comment mapChat : comments) {
+			commentRepository.delete(mapChat);
 		}
 		groupChatRepository.delete(groupChat);
 	}

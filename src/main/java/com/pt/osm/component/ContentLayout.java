@@ -31,11 +31,13 @@ public class ContentLayout extends Vlayout implements IObserver {
 	}
 
 	public void setGroupId(long linkId) {
+		System.out.println(linkId);
 		removeEventListener();
 		this.key = String.valueOf(linkId);
 		addEventListener();
 		this.getChildren().clear();
 		List<Comment> lst = requestService.findByLinkId(linkId);
+		System.out.println(lst);
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		for (Comment comment : lst) {
 			loadComment(df, comment);

@@ -6,6 +6,7 @@ import com.pt.osm.model.User;
 import com.pt.osm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,11 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+    
+    @Transactional(readOnly = true)
+    public User findById(long id) {
+        return userRepository.findById(id).get();
     }
     
     public User getUser(String username, String pass) {
