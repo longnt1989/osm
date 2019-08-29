@@ -16,9 +16,9 @@
 					<n:img hflex="1" src="/img/iconLogo.png" alt="logologin" style="width: 90px; margin-top:5px" />
 				</div>
 				<div hflex="3" style="float:left">
-					<n:img src="/img/iconChatTask.png" style="height: 40px; float:right; margin-right:10px;margin-top:5px" />
-					<n:img src="/img/iconChatNonTask.png" style="height: 40px; float:right; margin-right:10px;margin-top:5px" />
-					<n:img src="/img/iconNotification.png" style="height: 40px; float:right; margin-right:10px;margin-top:5px" />
+					<n:img src="/img/iconChatNonTask.jpg" style="height: 40px; float:right; margin-right:10px;margin-top:5px" />
+					<n:img src="/img/iconChatTask.jpg" style="height: 38px; float:right; margin-right:10px;margin-top:5px" />
+					<n:img src="/img/iconNotification.png" style="height: 35px; float:right; margin-right:10px;margin-top:5px" />
 					<a style="height:45px; margin-top:2px; padding:10px; padding-top:10px; float:right; text-decoration:none; margin-right:20px">Production</a>
 					<a id="aDevelopment" style="height:45px; margin-top:2px; padding:10px; padding-top:10px; float:right; text-decoration:none; margin-right:20px">Development</a>
 					<a id="aData" style="width:15px; height:15px; border-radius:15px; border:1px solid;float:right;margin-right:15px;margin-top: 15px "></a>

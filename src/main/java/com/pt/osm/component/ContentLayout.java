@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
@@ -31,17 +32,16 @@ public class ContentLayout extends Vlayout implements IObserver {
 	}
 
 	public void setGroupId(long linkId) {
-		System.out.println(linkId);
 		removeEventListener();
 		this.key = String.valueOf(linkId);
 		addEventListener();
 		this.getChildren().clear();
 		List<Comment> lst = requestService.findByLinkId(linkId);
-		System.out.println(lst);
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		for (Comment comment : lst) {
 			loadComment(df, comment);
 		}
+		
 	}
 
 	@Override
@@ -104,5 +104,6 @@ public class ContentLayout extends Vlayout implements IObserver {
 		Label lb = new Label(comment.getContent());
 		lb.setStyle("width:85%; float:left");
 		lb.setParent(vlayout);
+		Clients.scrollIntoView(div);
 	}
 }

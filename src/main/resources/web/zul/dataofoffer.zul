@@ -9,16 +9,16 @@
 	<panelchildren style="padding:0px">
 		<grid>
 			<columns sizable="true">
-				<column label="Nr" width="80px;" style="background:#089fe3"/>
-				<column label="Data name" width="100px" style="background:#089fe3"/>
-				<column label="Data format" width="100px" style="background:#089fe3"/>
-				<column label="Amount" width="100px" style="background:#089fe3"/>
-				<column label="Delivery time" width="150px" style="background:#089fe3"/>
-				<column label="Note" style="background:#089fe3"/>
-				<column label="Submission" width="100px" style="background:#089fe3"/>
-				<column label="Time" width="50px" style="background:#089fe3"/>
-				<column label="Responsible" width="100px" style="background:#089fe3"/>
-				<column label="" width="80px" style="background:#089fe3"/>
+				<column label="Nr" width="80px;" style="background:#14872c"/>
+				<column label="Data name" width="100px" style="background:#14872c"/>
+				<column label="Data format" width="100px" style="background:#14872c"/>
+				<column label="Amount" width="100px" style="background:#14872c"/>
+				<column label="Delivery time" width="150px" style="background:#14872c"/>
+				<column label="Note" style="background:#14872c"/>
+				<column label="Submission" width="100px" style="background:#14872c"/>
+				<column label="Time" width="50px" style="background:#14872c"/>
+				<column label="Responsible" width="100px" style="background:#14872c"/>
+				<column label="" width="80px" style="background:#14872c"/>
 			</columns>
 			<rows id="rowsOfferData">
 

@@ -1,74 +1,74 @@
 <div hflex="1" vflex="1">
 	<div height="100px">
-		<div style="width:150px; height:50px; border:1px solid #09a2e3; float: left; margin-top:20px; margin-left:10px">
+		<div style="width:150px; height:50px; border:1px solid #14872c; float: left; margin-top:20px; margin-left:10px">
 			<label style="font-size: 16px; position: absolute;margin-top: -10px;background: white;
-				color:#09a2e3;margin-left: 10px;font-weight: bold;">
+				color:#14872c;margin-left: 10px;font-weight: bold;">
 				Request number
 			</label>
 			<label width="100%" height="100%" style="font-size:18px; text-align:center;
-				float: left; padding-top: 15px;color:#09a2e3">
+				float: left; padding-top: 15px;color:#14872c">
 				001
 			</label>
 		</div>
-		<div style="width:150px; height:50px; border:1px solid #09a2e3; float: left; margin-top:20px; margin-left:10px">
+		<div style="width:150px; height:50px; border:1px solid #14872c; float: left; margin-top:20px; margin-left:10px">
 			<label style="font-size: 16px; position: absolute;margin-top: -10px;background: white;
-				color:#09a2e3;margin-left: 10px;font-weight: bold;">
+				color:#14872c;margin-left: 10px;font-weight: bold;">
 				Deadline
 			</label>
 			<label width="100%" height="100%" style="font-size:18px; text-align:center;
-				float: left; padding-top: 15px;color:#09a2e3">
+				float: left; padding-top: 15px;color:#14872c">
 				14/09/2019
 			</label>
 		</div>
 
-		<div style="width:190px; height:70px; border:1px solid #09a2e3; float: left; margin-top:10px; margin-left:40px">
+		<div style="width:190px; height:70px; border:1px solid #14872c; float: left; margin-top:10px; margin-left:40px">
 			<image src="img/iconAssign.jpg" style="height:35px;margin-top: 10px;"></image>
-			<label width="100%" height="100%" style="color:#09a2e3; margin-left:10px">Nguyen Trung Long</label>
+			<label width="100%" height="100%" style="color:#14872c; margin-left:10px">Nguyen Trung Long</label>
 		</div>
 	</div>
 	<div vflex="1" style="margin-top:20px">
-		<panel width="300px" style="float: left;margin-right:20px; background:#089fe3">
+		<panel width="300px" style="float: left;margin-right:20px;">
 			<caption label="General infomation" style="padding:0px;color: white" />
 			<panelchildren style="padding:0px">
 				<grid style="overflow: hidden;">
 					<columns sizable="true">
-						<column label="" width="150px" style="color:#09a2e3" />
+						<column label="" width="150px" style="color:#14872c" />
 						<column label="" />
 					</columns>
 					<rows>
 						<row>
-							<label value="Request number" style="color:#09a2e3" />
+							<label value="Request number" style="color:#14872c" />
 							<label value="001" />
 						</row>
 						<row>
-							<label value="Main client" style="color:#09a2e3" />
+							<label value="Main client" style="color:#14872c" />
 							<label value="HS Consulting" />
 						</row>
 						<row>
-							<label value="Sub client" style="color:#09a2e3" />
+							<label value="Sub client" style="color:#14872c" />
 							<label value="" />
 						</row>
 						<row>
-							<label value="Contractor" style="color:#09a2e3" />
+							<label value="Contractor" style="color:#14872c" />
 							<label value="Phuc Tien" />
 						</row>
 						<row>
-							<label value="Creation by" style="color:#09a2e3" />
+							<label value="Creation by" style="color:#14872c" />
 							<label value="" />
 						</row>
 						<row>
-							<label value="Creation Date" style="color:#09a2e3" />
+							<label value="Creation Date" style="color:#14872c" />
 							<label value="" />
 						</row>
 						<row>
-							<label value="Short name" style="color:#09a2e3" />
+							<label value="Short name" style="color:#14872c" />
 							<label value="" />
 						</row>
 					</rows>
 				</grid>
 			</panelchildren>
 		</panel>
-		<panel hflex="1" style="border:1px solid #09a2e3; background:#089fe3">
+		<panel hflex="1" style="border:1px solid #14872c;">
 			<caption label="Description of the request" style="padding:0px;color: white" />
 			<panelchildren style="padding:0px">
 			 <textbox rows="20" style="width:100%; height:100%"></textbox>

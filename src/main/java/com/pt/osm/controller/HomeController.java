@@ -308,7 +308,6 @@ public class HomeController extends SelectorComposer<Component> {
 			}
 		});
 
-		
 		center = new ContentLayout();
 		center.setParent(divChat1);
 		center.setStyle("width:100%; float:left;height:100%;overflow-y: auto;");
@@ -384,6 +383,7 @@ public class HomeController extends SelectorComposer<Component> {
 							groupChat.setType(0);
 						} else {
 							groupChat.setType(1);
+							groupChat.setLinkId(request.getId());
 						}
 						groupChat.setIndexChat(1);
 						groupChat = requestService.saveGroupChat(groupChat);
@@ -501,10 +501,36 @@ public class HomeController extends SelectorComposer<Component> {
 				"height:45px; margin-top:2px; padding:10px; padding-top:8px; text-decoration:none; margin-left:10px");
 		aDevelopment.setStyle(
 				"background:#c3e1f7;height:45px; margin-top:2px; padding:10px; padding-top:10px; float:right; text-decoration:none; margin-right:20px");
+		loadUITask();
 	}
 
 	private void loadUIChat(int type) {
-		List<GroupChat> lst = requestService.findByTypeAndLinkId(type, 0);
+		List<GroupChat> lst = new ArrayList<GroupChat>();
+		if (type == 0) {
+			lst = requestService.findByTypeAndLinkId(type, 0);
+		} else {
+			if (request != null) {
+				lst = requestService.findByTypeAndLinkId(type, request.getId());
+				if (lst.size() == 0) {
+					GroupChat groupChat = new GroupChat();
+					groupChat.setName("Budget");
+					groupChat.setTime(new Date());
+					groupChat.setType(1);
+					groupChat.setLinkId(request.getId());
+					groupChat.setIndexChat(2);
+					groupChat = requestService.saveGroupChat(groupChat);
+					groupChat = new GroupChat();
+					groupChat.setName("Technic");
+					groupChat.setTime(new Date());
+					groupChat.setType(1);
+					groupChat.setLinkId(request.getId());
+					groupChat.setIndexChat(1);
+					groupChat = requestService.saveGroupChat(groupChat);
+				}
+				lst = requestService.findByTypeAndLinkId(type, request.getId());
+			}
+
+		}
 		lstChat = new ArrayList<GroupChat>();
 		for (int i = 0; i < lst.size();) {
 			if (lst.get(i).getIndexChat() > 0) {
@@ -581,7 +607,7 @@ public class HomeController extends SelectorComposer<Component> {
 	}
 
 	private void loadUINoneTask() {
-		
+
 		imgAdd.setSrc("/img/iconGroupAddN.png");
 		aNoneTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;background:#0064ed; border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
@@ -598,7 +624,9 @@ public class HomeController extends SelectorComposer<Component> {
 	}
 
 	private void loadUITask() {
-		
+		if (request == null) {
+			return;
+		}
 		imgAdd.setSrc("/img/iconGroupAddT.png");
 		aNoneTask.setStyle(
 				"width:15px; height:15px; border-radius:15px;border:1px solid;float:left;margin-left:15px;margin-top: 13px ");
