@@ -144,6 +144,8 @@ public class HomeController extends SelectorComposer<Component> {
 						"background:#c3e1f7;height:45px; margin-top:2px; padding:10px; padding-top:8px; text-decoration:none; margin-left:10px");
 				aDevelopment.setStyle(
 						"height:45px; margin-top:2px; padding:10px; padding-top:10px; float:right; text-decoration:none; margin-right:20px");
+				request = null;
+				loadUINoneTask();
 			};
 		});
 		aDetail.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
@@ -209,35 +211,31 @@ public class HomeController extends SelectorComposer<Component> {
 				txtChat.setValue("");
 			}
 		});
-		txtChat.setCtrlKeys("@1@2@3^1^2^3");
+		txtChat.setCtrlKeys("@1@2@3^1");
 		txtChat.addEventListener(Events.ON_CTRL_KEY, new EventListener<KeyEvent>() {
 			@Override
 			public void onEvent(KeyEvent event) throws Exception {
 				int keyCode = ((KeyEvent) event).getKeyCode();
 				if (event.isCtrlKey()) {
-					switch (keyCode) {
-					case 49:
-						loadHeader(div1, div2, div3, key1);
-						break;
-					case 50:
-						loadHeader(div2, div1, div3, key2);
-						break;
-					case 51:
-						loadHeader(div3, div1, div2, key3);
-						break;
-
-					default:
-						break;
+					System.out.println(112);
+					if (!aNoneTask.getStyle().contains("0064ed")) {
+						loadUINoneTask();
+					} else {
+						loadUITask();
 					}
 				} else {
 					if (event.isAltKey()) {
 						switch (keyCode) {
 						case 49:
-							loadUINoneTask();
+							loadHeader(div1, div2, div3, key1);
 							break;
 						case 50:
-							loadUITask();
+							loadHeader(div2, div1, div3, key2);
 							break;
+						case 51:
+							loadHeader(div3, div1, div2, key3);
+							break;
+
 						default:
 							break;
 						}
@@ -568,6 +566,7 @@ public class HomeController extends SelectorComposer<Component> {
 			lb1.setLabel(lstChat.get(0).getName());
 			key1 = String.valueOf(lstChat.get(0).getId());
 			center.setGroupId(lstChat.get(0).getId());
+			this.key = key1;
 			break;
 		case 2:
 			uiChat3.setVisible(false);
@@ -579,6 +578,7 @@ public class HomeController extends SelectorComposer<Component> {
 			key2 = String.valueOf(lstChat.get(1).getId());
 			center.setGroupId(lstChat.get(0).getId());
 			center1.setGroupId(lstChat.get(1).getId());
+			this.key = key1;
 			break;
 		default:
 			uiChat3.setVisible(true);
